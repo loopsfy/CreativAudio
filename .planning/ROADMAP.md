@@ -28,11 +28,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Running `npm run dev` starts a local dev server that renders a page with the CreativAudio color scheme (light theme, #FF5C00 accent)
   2. Pushing to the git repo triggers a Vercel deployment that serves the site at a public URL
   3. The project uses Astro 5.x with island architecture and Tailwind CSS v4 with the project's design tokens (colors, fonts: Orbitron, Inter, DM Mono)
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md — Scaffold Astro 5.x + Tailwind v4 with design tokens and deploy to Vercel
 
 ### Phase 2: Static Sections
 **Goal**: Users see the complete landing page with all sections rendered as static HTML/CSS, fully responsive, matching the Pencil design
@@ -99,7 +98,7 @@ Note: Phases 3, 4, and 5 all depend on Phase 2 but are independent of each other
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/1 | Not started | - |
 | 2. Static Sections | 0/TBD | Not started | - |
 | 3. Marketing & Navigation | 0/TBD | Not started | - |
 | 4. Animation | 0/TBD | Not started | - |
