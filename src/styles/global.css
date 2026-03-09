@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors */
+  --color-accent: #FF5C00;
+  --color-accent-light: #FF7A33;
+  --color-accent-dark: #CC4A00;
+
+  /* Neutral palette */
+  --color-bg: #FFFFFF;
+  --color-surface: #F9FAFB;
+  --color-border: #E5E7EB;
+  --color-text: #1A1A1A;
+  --color-text-muted: #6B7280;
+
+  /* Typography */
+  --font-heading: "Orbitron", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
+
+/* Apply base font to body */
+body {
+  font-family: var(--font-body);
+}
