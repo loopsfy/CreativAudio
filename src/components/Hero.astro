@@ -1,0 +1,62 @@
+---
+import { Star, ArrowRight } from "@lucide/astro";
+---
+
+<section class="flex flex-col items-center gap-12 py-16 md:py-20 px-6 md:px-16 lg:px-20 bg-gradient-to-b from-[#FFF0E6] via-[#FFF0E6] to-white">
+
+  <!-- Social proof row -->
+  <div class="flex items-center gap-2">
+    <Star size={14} class="text-accent fill-accent" />
+    <Star size={14} class="text-accent fill-accent" />
+    <Star size={14} class="text-accent fill-accent" />
+    <Star size={14} class="text-accent fill-accent" />
+    <Star size={14} class="text-accent fill-accent" />
+    <span class="font-body text-sm text-text-body">Trusted by 10,000+ producers</span>
+  </div>
+
+  <!-- ORBITAL wordmark -->
+  <h1 class="font-heading text-6xl md:text-7xl lg:text-8xl font-bold tracking-wider text-text-primary">
+    ORBITAL
+  </h1>
+
+  <!-- Hero text group -->
+  <div class="flex flex-col items-center gap-6 text-center">
+    <p class="font-heading text-base md:text-[20px] font-normal text-text-body tracking-[4px] uppercase">
+      Next-Generation Audio Synthesis
+    </p>
+    <p class="font-body text-base md:text-lg text-text-body leading-relaxed max-w-[560px]">
+      Orbital delivers three independent oscillator engines, a spectral effects suite, and intelligent modulation routing — all in a single, performance-optimized plugin.
+    </p>
+  </div>
+
+  <!-- CTA button -->
+  <a
+    href="#pricing"
+    class="rounded-md bg-gradient-to-r from-accent to-accent-end px-10 py-4 text-[15px] font-semibold text-white tracking-[1px] inline-flex items-center gap-2 hover:opacity-90 transition-opacity"
+  >
+    GET ORBITAL
+    <ArrowRight size={18} />
+  </a>
+
+  <!-- Product visual placeholder -->
+  <div class="w-full max-w-[900px] aspect-[9/5] rounded-xl border border-border bg-card relative overflow-hidden">
+    <div class="absolute inset-0 bg-radial-[circle_at_center] from-[#FF5C0010] to-transparent opacity-40"></div>
+    <div class="absolute inset-0 flex items-center justify-center">
+      <span class="text-text-light text-lg font-body">Product Visual</span>
+    </div>
+  </div>
+
+  <!-- DAW Compatibility row -->
+  <div class="flex items-center gap-4 md:gap-8 py-5 flex-wrap justify-center">
+    <span class="font-body text-xs text-text-light">Compatible with</span>
+    <span class="w-px h-4 bg-border-medium"></span>
+    <span class="font-mono text-[13px] font-medium text-text-body">VST3</span>
+    <span class="w-px h-4 bg-border-medium"></span>
+    <span class="font-mono text-[13px] font-medium text-text-body">AU</span>
+    <span class="w-px h-4 bg-border-medium"></span>
+    <span class="font-mono text-[13px] font-medium text-text-body">AAX</span>
+    <span class="w-px h-4 bg-border-medium"></span>
+    <span class="font-mono text-[13px] font-medium text-text-body">Windows & macOS</span>
+  </div>
+
+</section>
