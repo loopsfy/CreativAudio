@@ -13,16 +13,67 @@ const testimonials = [
     quote: "Orbital has completely transformed my production workflow. The oscillator engines are unlike anything I've used before.",
     author: "Alex Rivera",
     role: "Electronic Producer",
+    img: "https://i.pravatar.cc/80?img=11",
   },
   {
     quote: "The spectral effects suite alone is worth the price. I've replaced three plugins with just Orbital.",
     author: "Sarah Chen",
     role: "Sound Designer",
+    img: "https://i.pravatar.cc/80?img=5",
   },
   {
     quote: "Best synth plugin I've purchased in years. The preset morphing feature is absolutely game-changing.",
     author: "Marcus Johnson",
     role: "Film Composer",
+    img: "https://i.pravatar.cc/80?img=12",
+  },
+  {
+    quote: "I was skeptical at first, but Orbital blew me away. The sound quality is pristine and the CPU usage is incredibly low.",
+    author: "Lena Krüger",
+    role: "Techno Producer",
+    img: "https://i.pravatar.cc/80?img=23",
+  },
+  {
+    quote: "The modulation system is insanely deep. Every time I open Orbital I discover something new. An absolute must-have.",
+    author: "Davi Santos",
+    role: "Ambient Artist",
+    img: "https://i.pravatar.cc/80?img=53",
+  },
+  {
+    quote: "Replaced my entire synth chain with Orbital. The visual feedback engine makes sound design so intuitive.",
+    author: "Jordan Park",
+    role: "Mix Engineer",
+    img: "https://i.pravatar.cc/80?img=33",
+  },
+  {
+    quote: "The 500+ presets are actually usable — not filler. I've already used Orbital on three commercial releases.",
+    author: "Nia Okafor",
+    role: "Pop Producer",
+    img: "https://i.pravatar.cc/80?img=44",
+  },
+  {
+    quote: "I teach synthesis at Berklee and Orbital is now part of my curriculum. The interface is educational and powerful.",
+    author: "Prof. David Lin",
+    role: "Music Educator",
+    img: "https://i.pravatar.cc/80?img=60",
+  },
+  {
+    quote: "Built an entire EP with just Orbital. From pads to leads to basses — it does everything and sounds incredible.",
+    author: "Mika Tanaka",
+    role: "Synthwave Artist",
+    img: "https://i.pravatar.cc/80?img=15",
+  },
+  {
+    quote: "The preset morphing is witchcraft. Blending between sounds in real-time opened up a whole new dimension for my live sets.",
+    author: "Carlos Vega",
+    role: "Live Performer",
+    img: "https://i.pravatar.cc/80?img=52",
+  },
+  {
+    quote: "As a film composer, I need unique textures fast. Orbital delivers every single time. Worth every penny.",
+    author: "Emma Whitfield",
+    role: "Cinematic Composer",
+    img: "https://i.pravatar.cc/80?img=9",
   },
 ];
 ---
@@ -44,24 +95,60 @@ const testimonials = [
     ))}
   </div>
 
-  <!-- Testimonials Row -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-[1200px]">
-    {testimonials.map((testimonial) => (
-      <div class="rounded-xl bg-card border border-border p-8 flex flex-col gap-5">
-        <!-- Stars -->
-        <div class="flex gap-1">
-          {Array.from({ length: 5 }).map(() => (
-            <Star size={16} class="text-accent fill-accent" />
-          ))}
+  <!-- Testimonials Carousel -->
+  <div class="w-full max-w-[1200px] overflow-hidden relative" id="testimonial-carousel">
+    <!-- Fade edges -->
+    <div class="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none"></div>
+
+    <div class="flex gap-6 carousel-track">
+      {/* Duplicate testimonials for seamless loop */}
+      {[...testimonials, ...testimonials].map((testimonial) => (
+        <div class="min-w-[340px] max-w-[340px] rounded-xl bg-card border border-border p-8 flex flex-col gap-5 shrink-0">
+          <!-- Stars -->
+          <div class="flex gap-1">
+            {Array.from({ length: 5 }).map(() => (
+              <Star size={16} class="text-accent fill-accent" />
+            ))}
+          </div>
+          <!-- Quote -->
+          <p class="text-[15px] text-text-body leading-relaxed flex-1">"{testimonial.quote}"</p>
+          <!-- Author -->
+          <div class="flex items-center gap-3">
+            <img
+              src={testimonial.img}
+              alt={testimonial.author}
+              width="40"
+              height="40"
+              class="w-10 h-10 rounded-full object-cover"
+              loading="lazy"
+            />
+            <div class="flex flex-col gap-0.5">
+              <span class="text-sm font-semibold text-text-primary">{testimonial.author}</span>
+              <span class="text-xs text-text-light">{testimonial.role}</span>
+            </div>
+          </div>
         </div>
-        <!-- Quote -->
-        <p class="text-[15px] text-text-body leading-relaxed">"{testimonial.quote}"</p>
-        <!-- Author -->
-        <div class="flex flex-col gap-0.5">
-          <span class="text-sm font-semibold text-text-primary">{testimonial.author}</span>
-          <span class="text-xs text-text-light">{testimonial.role}</span>
-        </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </section>
+
+<style>
+  .carousel-track {
+    animation: scroll 40s linear infinite;
+  }
+
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
