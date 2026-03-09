@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-03-09)
 ## Current Position
 
 Phase: 2 of 5 (Static Sections)
-Plan: 1 of 5 in current phase (COMPLETE)
+Plan: 2 of 5 in current phase (COMPLETE)
 Status: Executing phase 2
-Last activity: 2026-03-09 — Completed 02-01 Design Tokens & Foundation
+Last activity: 2026-03-09 — Completed 02-02 Header & Hero
 
-Progress: [██░░░░░░░░] 20%
+Progress: [███░░░░░░░] 30%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 15min
-- Total execution time: 0.50 hours
+- Total plans completed: 3
+- Average duration: 10min
+- Total execution time: 0.52 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation | 1 | 27min | 27min |
-| 02-static-sections | 1 | 3min | 3min |
+| 02-static-sections | 2 | 4min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (27min), 02-01 (3min)
+- Last 5 plans: 01-01 (27min), 02-01 (3min), 02-02 (1min)
 - Trend: improving
 
 *Updated after each plan completion*
@@ -52,6 +52,8 @@ Recent decisions affecting current work:
 - [01-01]: Static output to Vercel with auto-detection (no SSR adapter)
 - [02-01]: DM Mono 700 weight unavailable in @fontsource; using 500 as max weight
 - [02-01]: Design tokens use exact Pencil spec hex values (e.g., #F0F0F2 not #F9FAFB)
+- [02-02]: ORBITAL wordmark as Orbitron text (not SVG) to avoid asset dependency
+- [02-02]: Mobile nav hidden with Menu placeholder; hamburger toggle deferred to Phase 3
 
 ### Pending Todos
 
@@ -65,5 +67,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 02-01-PLAN.md
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None
