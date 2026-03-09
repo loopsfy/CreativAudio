@@ -1,0 +1,37 @@
+---
+import { ShoppingCart, Menu } from "@lucide/astro";
+---
+
+<header class="sticky top-0 z-50 bg-bg border-b border-border">
+  <div class="flex items-center justify-between py-5 px-6 md:px-16 lg:px-20">
+    <!-- Logo -->
+    <a href="/" class="font-mono text-[20px] font-semibold text-text-primary tracking-[2px]">
+      CreativAudio
+    </a>
+
+    <!-- Nav (desktop only) -->
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+      <a href="#features" class="font-body text-[13px] font-medium text-text-secondary tracking-[0.8px] hover:text-text-primary transition-colors">PRODUCTS</a>
+      <a href="#presets" class="font-body text-[13px] font-medium text-text-secondary tracking-[0.8px] hover:text-text-primary transition-colors">PRESETS</a>
+      <a href="#support" class="font-body text-[13px] font-medium text-text-secondary tracking-[0.8px] hover:text-text-primary transition-colors">SUPPORT</a>
+      <a href="#about" class="font-body text-[13px] font-medium text-text-secondary tracking-[0.8px] hover:text-text-primary transition-colors">ABOUT</a>
+    </nav>
+
+    <!-- Right group -->
+    <div class="flex items-center gap-4">
+      <!-- Mobile menu icon (non-functional placeholder) -->
+      <button class="lg:hidden text-text-secondary" aria-label="Menu">
+        <Menu size={20} />
+      </button>
+
+      <ShoppingCart size={20} class="text-text-secondary" />
+
+      <a
+        href="#pricing"
+        class="rounded-md bg-accent px-6 py-2.5 text-[13px] font-semibold text-white tracking-[0.5px] hover:bg-accent-dark transition-colors"
+      >
+        BUY NOW
+      </a>
+    </div>
+  </div>
+</header>
