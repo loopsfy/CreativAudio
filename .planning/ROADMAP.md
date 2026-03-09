@@ -42,12 +42,14 @@ Plans:
   2. Every section is fully responsive across desktop, tablet, and mobile viewports with no layout breakage
   3. Images use optimized formats (WebP/AVIF via Astro Image component) with lazy loading, and the page has proper SEO meta tags (title, description, Open Graph)
   4. The layout, typography, colors, and spacing match the Pencil design file closely
-**Plans**: TBD
+**Plans:** 5 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
-- [ ] 02-03: TBD
+- [ ] 02-01-PLAN.md — Update design tokens, SEO meta, install @lucide/astro, SectionDivider
+- [ ] 02-02-PLAN.md — Header and Hero sections
+- [ ] 02-03-PLAN.md — Features and Sound Library sections
+- [ ] 02-04-PLAN.md — Social Proof and Pricing sections
+- [ ] 02-05-PLAN.md — FAQ, Footer, page composition, and visual verification
 
 ### Phase 3: Marketing & Navigation
 **Goal**: Users experience the pricing urgency timer and can navigate between sections with smooth scrolling
@@ -99,7 +101,7 @@ Note: Phases 3, 4, and 5 all depend on Phase 2 but are independent of each other
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/1 | Not started | - |
-| 2. Static Sections | 0/TBD | Not started | - |
+| 2. Static Sections | 0/5 | Not started | - |
 | 3. Marketing & Navigation | 0/TBD | Not started | - |
 | 4. Animation | 0/TBD | Not started | - |
 | 5. Commerce | 0/TBD | Not started | - |
