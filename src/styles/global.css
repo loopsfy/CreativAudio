@@ -1,23 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand colors */
+  /* Brand */
   --color-accent: #FF5C00;
   --color-accent-light: #FF7A33;
   --color-accent-dark: #CC4A00;
+  --color-accent-end: #FF8A4C;
 
-  /* Neutral palette */
+  /* Text */
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-body: #666666;
+  --color-text-light: #888888;
+  --color-text-lighter: #999999;
+
+  /* Backgrounds */
   --color-bg: #FFFFFF;
-  --color-surface: #F9FAFB;
-  --color-border: #E5E7EB;
-  --color-text: #1A1A1A;
-  --color-text-muted: #6B7280;
+  --color-surface: #FAFAFA;
+  --color-surface-footer: #F5F5F7;
+  --color-card: #F0F0F2;
+
+  /* Borders */
+  --color-border: #E5E5E7;
+  --color-border-medium: #D4D4D8;
+
+  /* Special */
+  --color-timer-bg: #111111;
 
   /* Typography */
   --font-heading: "Orbitron", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "DM Mono", monospace;
 }
+
+/* Summary/details marker removal */
+summary { list-style: none; }
+summary::-webkit-details-marker { display: none; }
 
 /* Apply base font to body */
 body {
