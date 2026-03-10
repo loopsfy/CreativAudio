@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+<Layout title="Refund Policy | CreativAudio">
+  <Header />
+  <main class="max-w-[680px] mx-auto px-6 py-16 md:py-24">
+    <h1 class="font-heading text-3xl md:text-4xl font-bold text-text-primary mb-8">Refund Policy</h1>
+
+    <div class="flex flex-col gap-6 text-text-body text-[15px] leading-relaxed">
+      <p>
+        At CreativAudio, we want you to be completely satisfied with your purchase. We offer a fair and transparent refund policy for all our digital products.
+      </p>
+
+      <h2 class="text-lg font-semibold text-text-primary mt-2">Eligibility</h2>
+      <p>
+        You are eligible for a refund if you contact us within <strong>14 days</strong> of your order and have <strong>not yet downloaded</strong> your product. Once a product has been downloaded or 14 days have elapsed, we cannot offer a refund.
+      </p>
+
+      <h2 class="text-lg font-semibold text-text-primary mt-2">How to Request a Refund</h2>
+      <p>
+        To request a refund, please contact us at <a href="mailto:info@loopsfy.com" class="text-accent hover:underline">info@loopsfy.com</a> with your order number and the email address used for the purchase. We will process your refund within 5-7 business days.
+      </p>
+
+      <h2 class="text-lg font-semibold text-text-primary mt-2">Non-Refundable Cases</h2>
+      <ul class="list-disc pl-5 flex flex-col gap-2">
+        <li>The product has already been downloaded.</li>
+        <li>More than 14 days have passed since the date of purchase.</li>
+        <li>The refund request does not include valid order information.</li>
+      </ul>
+
+      <h2 class="text-lg font-semibold text-text-primary mt-2">Contact</h2>
+      <p>
+        If you have any questions about our refund policy, reach out to us at <a href="mailto:info@loopsfy.com" class="text-accent hover:underline">info@loopsfy.com</a>.
+      </p>
+    </div>
+  </main>
+  <Footer />
+</Layout>

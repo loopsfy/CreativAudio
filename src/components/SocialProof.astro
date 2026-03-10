@@ -85,10 +85,10 @@ const testimonials = [
   </div>
 
   <!-- Testimonials Carousel -->
-  <div class="w-full max-w-[1200px] overflow-hidden relative" id="testimonial-carousel" data-animate="fade-in">
+  <div class="w-full max-w-full overflow-hidden relative" id="testimonial-carousel" data-animate="fade-in">
     <!-- Fade edges -->
-    <div class="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none"></div>
-    <div class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute left-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none"></div>
 
     <div class="flex gap-6 carousel-track">
       {/* Duplicate testimonials for seamless loop */}
@@ -128,11 +128,26 @@ const testimonials = [
 
 <style>
   .carousel-track {
-    animation: scroll 40s linear infinite;
+    animation: scroll 10s linear infinite;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-track {
+      animation: scroll 20s linear infinite;
+    }
   }
 
   .carousel-track:hover {
     animation-play-state: paused;
+  }
+
+  .carousel-track.dragging {
+    animation-play-state: paused;
+    cursor: grabbing;
+  }
+
+  .carousel-track {
+    cursor: grab;
   }
 
   @keyframes scroll {
@@ -144,3 +159,54 @@ const testimonials = [
     }
   }
 </style>
+
+<script>
+  const track = document.querySelector('.carousel-track') as HTMLElement;
+  let isDragging = false;
+  let startX = 0;
+  let offsetAtGrab = 0;
+
+  function getComputedTranslateX() {
+    const style = window.getComputedStyle(track);
+    const matrix = new DOMMatrix(style.transform);
+    return matrix.m41;
+  }
+
+  function startDrag(x: number) {
+    isDragging = true;
+    startX = x;
+    // Capture current computed position and freeze animation
+    offsetAtGrab = getComputedTranslateX();
+    track.style.animation = 'none';
+    track.style.transform = `translateX(${offsetAtGrab}px)`;
+    track.classList.add('dragging');
+  }
+
+  function moveDrag(x: number) {
+    if (!isDragging) return;
+    const diff = x - startX;
+    track.style.transform = `translateX(${offsetAtGrab + diff}px)`;
+  }
+
+  function endDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove('dragging');
+    // Resume CSS animation from current position
+    track.style.transform = '';
+    track.style.animation = '';
+  }
+
+  // Mouse events
+  track.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    startDrag(e.clientX);
+  });
+  window.addEventListener('mousemove', (e) => moveDrag(e.clientX));
+  window.addEventListener('mouseup', endDrag);
+
+  // Touch events
+  track.addEventListener('touchstart', (e) => startDrag(e.touches[0].clientX), { passive: true });
+  track.addEventListener('touchmove', (e) => moveDrag(e.touches[0].clientX), { passive: true });
+  track.addEventListener('touchend', endDrag);
+</script>
