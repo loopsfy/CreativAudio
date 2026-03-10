@@ -9,6 +9,8 @@ import SocialProof from "../components/SocialProof.astro";
 import Pricing from "../components/Pricing.astro";
 import FAQ from "../components/FAQ.astro";
 import Footer from "../components/Footer.astro";
+import ScrollAnimations from "../components/ScrollAnimations.astro";
+import CartDrawer from "../components/CartDrawer";
 ---
 <Layout title="Orbital - Next-Generation Audio Synthesizer | CreativAudio">
   <Header />
@@ -26,4 +28,6 @@ import Footer from "../components/Footer.astro";
     <FAQ />
   </main>
   <Footer />
+  <CartDrawer client:load />
+  <ScrollAnimations />
 </Layout>

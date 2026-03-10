@@ -18,3 +18,5 @@ node_modules/
 # OS files
 .DS_Store
 Thumbs.db
+public/music-studio-video.mp4
+public/orbital-preview.mp4

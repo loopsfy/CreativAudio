@@ -1,0 +1,67 @@
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Section headers — fade in + slide up
+  gsap.utils.toArray<HTMLElement>("[data-animate='fade-up']").forEach((el) => {
+    gsap.from(el, {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+        once: true,
+      },
+    });
+  });
+
+  // Staggered cards — fade in + slide up with delay
+  gsap.utils.toArray<HTMLElement>("[data-animate='stagger']").forEach((container) => {
+    const items = container.children;
+    gsap.from(items, {
+      y: 50,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.12,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: container,
+        start: "top 80%",
+        once: true,
+      },
+    });
+  });
+
+  // Stats — count up + fade in
+  gsap.utils.toArray<HTMLElement>("[data-animate='fade-in']").forEach((el) => {
+    gsap.from(el, {
+      opacity: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+        once: true,
+      },
+    });
+  });
+
+  // Scale in — for pricing card, video, etc.
+  gsap.utils.toArray<HTMLElement>("[data-animate='scale-in']").forEach((el) => {
+    gsap.from(el, {
+      scale: 0.95,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+        once: true,
+      },
+    });
+  });
+</script>
