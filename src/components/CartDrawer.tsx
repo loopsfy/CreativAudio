@@ -131,12 +131,58 @@ export default function CartDrawer() {
                 ${total}
               </span>
             </div>
-            <button className="w-full py-3.5 rounded-md bg-gradient-to-r from-[#FF5C00] to-[#FF8A4C] text-white font-semibold text-[15px] tracking-[0.5px] hover:opacity-90 transition-opacity">
+            <button
+              onClick={() => {
+                if (typeof window !== "undefined" && (window as any).fbq) {
+                  (window as any).fbq("track", "InitiateCheckout", {
+                    content_name: "Orbital",
+                    content_type: "product",
+                    value: total,
+                    currency: "USD",
+                  });
+                }
+              }}
+              className="w-full py-3.5 rounded-md bg-gradient-to-r from-[#FF5C00] to-[#FF8A4C] text-white font-semibold text-[15px] tracking-[0.5px] hover:opacity-90 transition-opacity"
+            >
               CHECKOUT
             </button>
             <p className="text-xs text-[#999999] text-center">
               You'll be redirected to secure checkout
             </p>
+            {/* Payment icons */}
+            <div className="flex items-center justify-center gap-2 pt-1">
+              {/* Visa */}
+              <svg viewBox="0 0 48 32" width="38" height="24" className="opacity-50">
+                <rect width="48" height="32" rx="4" fill="#fff" stroke="#E5E5E7"/>
+                <path d="M21.2 12.3l-2.9 7.4h-2.1l-1.4-5.9c-.1-.3-.2-.5-.5-.6-.5-.3-1.3-.5-2-.7l.1-.2h3.3c.4 0 .8.3.9.8l.8 4.4 2.1-5.2h2.1zm8.3 5c0-2-2.7-2.1-2.7-3 0-.3.3-.5.7-.6.6 0 1.2.1 1.7.3l.3-1.5c-.5-.2-1.2-.4-2-.4-2.1 0-3.6 1.1-3.6 2.8 0 1.2 1.1 1.9 1.9 2.3.8.4 1.1.7 1.1 1 0 .6-.7.8-1.3.8-.6 0-1.3-.1-1.9-.4l-.3 1.5c.7.3 1.4.4 2.1.4 2.3.1 3.7-1 3.7-2.8l.3-.4zm5.7 2.4h1.8l-1.6-7.4h-1.7c-.4 0-.7.2-.8.5l-3 6.9h2.1l.4-1.1h2.5l.3 1.1zm-2.2-2.7l1-2.9.6 2.9h-1.6zM24 12.3l-1.6 7.4h-2l1.7-7.4h1.9z" fill="#1A1F71"/>
+              </svg>
+              {/* Mastercard */}
+              <svg viewBox="0 0 48 32" width="38" height="24" className="opacity-50">
+                <rect width="48" height="32" rx="4" fill="#fff" stroke="#E5E5E7"/>
+                <circle cx="19" cy="16" r="7" fill="#EB001B"/>
+                <circle cx="29" cy="16" r="7" fill="#F79E1B"/>
+                <path d="M24 10.8a7 7 0 0 1 0 10.4 7 7 0 0 1 0-10.4z" fill="#FF5F00"/>
+              </svg>
+              {/* Amex */}
+              <svg viewBox="0 0 48 32" width="38" height="24" className="opacity-50">
+                <rect width="48" height="32" rx="4" fill="#fff" stroke="#E5E5E7"/>
+                <rect x="4" y="6" width="40" height="20" rx="2" fill="#2E77BC"/>
+                <text x="24" y="18" textAnchor="middle" fill="#fff" fontSize="7" fontWeight="bold" fontFamily="Arial">AMEX</text>
+              </svg>
+              {/* PayPal */}
+              <svg viewBox="0 0 48 32" width="38" height="24" className="opacity-50">
+                <rect width="48" height="32" rx="4" fill="#fff" stroke="#E5E5E7"/>
+                <g transform="translate(10, 4) scale(1.5)">
+                  <path d="M14.06 3.713c.12-1.071-.093-1.832-.702-2.526C12.628.356 11.312 0 9.626 0H4.734a.7.7 0 0 0-.691.59L2.005 13.509a.42.42 0 0 0 .415.486h2.756l.692-4.386-.021.138a.7.7 0 0 1 .69-.593h1.44c2.82 0 5.027-1.144 5.672-4.456l.003-.016c.035-.18.059-.347.073-.503z" fill="#253B80"/>
+                  <path d="M6.543 8.82a.7.7 0 0 1 .321-.079H8.3c2.82 0 5.027-1.144 5.672-4.456l.003-.016q.326.186.548.438c.546.623.679 1.535.45 2.71-.272 1.397-.866 2.307-1.663 2.874-.802.57-1.842.815-3.043.815h-.38a.87.87 0 0 0-.863.734l-.03.164-.48 3.043-.024.13-.001.004a.35.35 0 0 1-.348.296H5.595a.106.106 0 0 1-.105-.123l.208-1.32.845-5.214z" fill="#179BD7"/>
+                  <path d="M6.543 8.82l.845-5.214A.7.7 0 0 1 8.08 3.02h1.444c.584 0 1.126.06 1.614.178a4.4 4.4 0 0 1 .922.35c.263.14.488.303.68.49-.19-1.216-.001-2.044.657-2.793C14.06.356 15.376 0 17.062 0h4.891a.7.7 0 0 1 .691.59l2.037 12.918a.42.42 0 0 1-.415.486h-2.98l-.748-4.742-.662 4.256a.87.87 0 0 1-.863.734h-2.545a.106.106 0 0 1-.105-.123l.208-1.32" fill="#222D65" opacity="0"/>
+                </g>
+              </svg>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" className="opacity-40 ml-1">
+                <path d="M12 7H4a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z" stroke="#999" strokeWidth="1.5"/>
+                <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="#999" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </div>
           </div>
         )}
       </div>

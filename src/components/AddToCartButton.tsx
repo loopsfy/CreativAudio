@@ -8,6 +8,16 @@ export default function AddToCartButton() {
     addToCart();
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
+
+    // Meta Pixel: AddToCart event
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq("track", "AddToCart", {
+        content_name: "Orbital",
+        content_type: "product",
+        value: 49,
+        currency: "USD",
+      });
+    }
   }
 
   return (
