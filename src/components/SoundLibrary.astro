@@ -1,12 +1,13 @@
 ---
-import { Play, ArrowRight } from "@lucide/astro";
+import { Play, Pause, ArrowRight } from "@lucide/astro";
 
 const presets = [
-  { name: "Cosmic Drift", category: "Ambient Pad", genre: "Ambient" },
-  { name: "Neural Bass", category: "Bass", genre: "Dubstep" },
-  { name: "Quantum Pad", category: "Pad", genre: "Cinematic" },
-  { name: "Digital Rain", category: "Arpeggio", genre: "Electronica" },
-  { name: "Void Lead", category: "Lead", genre: "Synthwave" },
+  { name: "Alert", category: "Keys", file: "/audio/alert.mp3" },
+  { name: "Astral", category: "Pads", file: "/audio/astral.mp3" },
+  { name: "Boom", category: "Bass", file: "/audio/boom.mp3" },
+  { name: "Glow", category: "Pluck", file: "/audio/glow.mp3" },
+  { name: "Jade", category: "Synth", file: "/audio/jade.mp3" },
+  { name: "Nostalgia", category: "Keys", file: "/audio/nostalgia.mp3" },
 ];
 ---
 
@@ -16,24 +17,28 @@ const presets = [
     <span class="text-xs font-semibold text-accent tracking-[2px] uppercase">SOUND LIBRARY</span>
     <h2 class="font-heading text-3xl md:text-[48px] font-bold text-text-primary tracking-tight leading-tight">Explore the Sound</h2>
     <p class="text-base md:text-lg text-text-body leading-relaxed text-center max-w-[600px]">
-      Browse through 500+ professionally designed presets spanning every genre and style.
+      175 ready-to-use presets with built-in effects for your beats. Crafted from legendary hardware synths like the Juno-106, Prophet-5, Minimoog, and Jupiter-8.
     </p>
   </div>
 
   <!-- Preset List -->
   <div class="flex flex-col gap-0.5 w-full max-w-[1200px]" data-animate="stagger">
-    {presets.map(({ name, category, genre }, index) => (
+    {presets.map(({ name, category, file }, index) => (
       <div class:list={[
-        "flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-lg p-5 sm:px-6 gap-3 sm:gap-0",
-        index % 2 === 0 ? "bg-card" : "bg-[#F5F5F7]"
-      ]}>
-        <div class="flex items-center gap-3">
+        "flex items-center rounded-lg p-5 px-6 gap-4",
+        index % 2 === 0 ? "bg-[#E8E8EC]" : "bg-[#DFDFE3]"
+      ]} data-preset data-file={file}>
+        <button class="preset-play flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-white hover:bg-accent hover:text-white transition-colors cursor-pointer" aria-label={`Play ${name}`}>
+          <Play size={16} class="play-icon" />
+          <Pause size={16} class="pause-icon hidden" />
+        </button>
+        <div class="flex flex-1 items-center justify-between">
           <span class="text-[15px] font-medium text-text-primary">{name}</span>
-          <span class="text-[13px] text-text-body">{category}</span>
+          <span class="text-xs font-medium text-text-secondary bg-white rounded-full px-3 py-1">{category}</span>
         </div>
-        <div class="flex items-center gap-4">
-          <span class="text-xs font-medium text-text-secondary bg-white rounded-full px-3 py-1">{genre}</span>
-          <Play size={18} class="text-text-secondary cursor-pointer" />
+        <!-- Progress bar -->
+        <div class="preset-progress hidden absolute bottom-0 left-0 right-0 h-[2px] bg-border-light rounded-b-lg overflow-hidden">
+          <div class="preset-progress-bar h-full bg-accent w-0 transition-all"></div>
         </div>
       </div>
     ))}
@@ -45,3 +50,72 @@ const presets = [
     <ArrowRight size={16} />
   </a>
 </section>
+
+<style>
+  [data-preset] {
+    position: relative;
+    overflow: hidden;
+  }
+  [data-preset].playing .play-icon {
+    display: none;
+  }
+  [data-preset].playing .pause-icon {
+    display: block;
+  }
+  [data-preset].playing .preset-progress {
+    display: block;
+  }
+  [data-preset].playing .preset-play {
+    background-color: var(--color-accent, #6C5CE7);
+    color: white;
+  }
+</style>
+
+<script>
+  let currentAudio: HTMLAudioElement | null = null;
+  let currentPreset: HTMLElement | null = null;
+
+  document.querySelectorAll('[data-preset]').forEach((el) => {
+    const preset = el as HTMLElement;
+    const btn = preset.querySelector('.preset-play') as HTMLButtonElement;
+    const file = preset.dataset.file!;
+    const progressBar = preset.querySelector('.preset-progress-bar') as HTMLElement;
+
+    btn.addEventListener('click', () => {
+      // If clicking the same preset that's playing, pause it
+      if (currentPreset === preset && currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        preset.classList.remove('playing');
+        return;
+      }
+
+      // Stop any currently playing audio
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentPreset?.classList.remove('playing');
+      }
+
+      // Play new audio
+      currentAudio = new Audio(file);
+      currentPreset = preset;
+      preset.classList.add('playing');
+
+      currentAudio.addEventListener('timeupdate', () => {
+        if (currentAudio && currentAudio.duration) {
+          const pct = (currentAudio.currentTime / currentAudio.duration) * 100;
+          progressBar.style.width = `${pct}%`;
+        }
+      });
+
+      currentAudio.addEventListener('ended', () => {
+        preset.classList.remove('playing');
+        progressBar.style.width = '0%';
+        currentAudio = null;
+        currentPreset = null;
+      });
+
+      currentAudio.play();
+    });
+  });
+</script>
