@@ -44,11 +44,97 @@ import { ArrowRight } from "@lucide/astro";
   </a>
 
   <!-- Product video -->
-  <div class="w-full max-w-[900px] rounded-xl border border-border overflow-hidden relative z-10">
-    <video autoplay loop muted playsinline class="w-full h-auto block">
+  <div class="w-full max-w-[900px] rounded-xl border border-border overflow-hidden relative z-10 group" id="video-container">
+    <video id="product-video" loop playsinline class="w-full h-auto block">
       <source src="/orbital-preview.mp4" type="video/mp4" />
     </video>
+
+    <!-- Play/Pause button (center) -->
+    <button
+      id="play-pause-btn"
+      class="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300"
+    >
+      <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-transform duration-200 shadow-lg">
+        <!-- Play icon -->
+        <svg id="play-icon" class="w-7 h-7 md:w-8 md:h-8 text-[#111111] ml-1" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5,3 19,12 5,21" />
+        </svg>
+        <!-- Pause icon (hidden) -->
+        <svg id="pause-icon" class="w-7 h-7 md:w-8 md:h-8 text-[#111111] hidden" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="5" y="3" width="4" height="18" rx="1" />
+          <rect x="15" y="3" width="4" height="18" rx="1" />
+        </svg>
+      </div>
+    </button>
+
+    <!-- Volume/Mute button (bottom-right) -->
+    <button
+      id="volume-btn"
+      class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center hover:bg-black/70 active:scale-95 transition-all duration-200 opacity-0 pointer-events-none"
+    >
+      <!-- Volume on icon -->
+      <svg id="volume-on-icon" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="currentColor" />
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+      </svg>
+      <!-- Volume mute icon (hidden) -->
+      <svg id="volume-mute-icon" class="w-5 h-5 text-white hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="currentColor" />
+        <line x1="23" y1="9" x2="17" y2="15" />
+        <line x1="17" y1="9" x2="23" y2="15" />
+      </svg>
+    </button>
   </div>
+
+  <script>
+    const video = document.getElementById('product-video') as HTMLVideoElement;
+    const playPauseBtn = document.getElementById('play-pause-btn')!;
+    const playIcon = document.getElementById('play-icon')!;
+    const pauseIcon = document.getElementById('pause-icon')!;
+    const volumeBtn = document.getElementById('volume-btn')!;
+    const volumeOnIcon = document.getElementById('volume-on-icon')!;
+    const volumeMuteIcon = document.getElementById('volume-mute-icon')!;
+
+    let isPlaying = false;
+
+    playPauseBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        video.pause();
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        playPauseBtn.classList.remove('opacity-0');
+        volumeBtn.classList.add('opacity-0', 'pointer-events-none');
+      } else {
+        video.play();
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+        // Fade out overlay after a short delay, show volume button
+        setTimeout(() => {
+          playPauseBtn.classList.add('opacity-0');
+          volumeBtn.classList.remove('opacity-0', 'pointer-events-none');
+        }, 600);
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // Show play/pause overlay on hover when playing
+    const container = document.getElementById('video-container')!;
+    container.addEventListener('mouseenter', () => {
+      if (isPlaying) playPauseBtn.classList.remove('opacity-0');
+    });
+    container.addEventListener('mouseleave', () => {
+      if (isPlaying) playPauseBtn.classList.add('opacity-0');
+    });
+
+    // Volume toggle
+    volumeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      volumeOnIcon.classList.toggle('hidden');
+      volumeMuteIcon.classList.toggle('hidden');
+    });
+  </script>
 
   <!-- DAW Compatibility row -->
   <div class="flex items-center gap-4 md:gap-8 py-5 flex-wrap justify-center relative z-10">
@@ -57,8 +143,6 @@ import { ArrowRight } from "@lucide/astro";
     <span class="font-mono text-[13px] font-medium text-text-body">VST3</span>
     <span class="w-px h-4 bg-border-medium"></span>
     <span class="font-mono text-[13px] font-medium text-text-body">AU</span>
-    <span class="w-px h-4 bg-border-medium"></span>
-    <span class="font-mono text-[13px] font-medium text-text-body">AAX</span>
     <span class="w-px h-4 bg-border-medium"></span>
     <span class="font-mono text-[13px] font-medium text-text-body">Windows & macOS</span>
   </div>

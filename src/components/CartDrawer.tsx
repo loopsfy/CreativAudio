@@ -31,7 +31,7 @@ export default function CartDrawer() {
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-[#E5E5E7]">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-[#E5E5E7] bg-[#F0F0F2]">
           <h2 className="text-lg font-semibold text-[#111111]">
             Your Cart ({count})
           </h2>
@@ -97,11 +97,11 @@ export default function CartDrawer() {
 
                       {/* Price */}
                       <div className="flex items-baseline gap-2">
-                        <span className="text-sm font-semibold text-[#111111]">
+                        <span className="text-base font-semibold text-[#111111]">
                           ${item.price * item.quantity}
                         </span>
                         {item.quantity === 1 && (
-                          <span className="text-xs text-[#999999] line-through">
+                          <span className="text-sm text-[#999999] line-through">
                             ${item.originalPrice}
                           </span>
                         )}
@@ -141,8 +141,9 @@ export default function CartDrawer() {
                     currency: "USD",
                   });
                 }
+                window.location.href = "https://loopsfy.com/cart/56507574911307:1";
               }}
-              className="w-full py-3.5 rounded-md bg-gradient-to-r from-[#FF5C00] to-[#FF8A4C] text-white font-semibold text-[15px] tracking-[0.5px] hover:opacity-90 transition-opacity"
+              className="w-full py-3.5 rounded-md bg-gradient-to-r from-[#FF5C00] to-[#FF8A4C] text-white font-semibold text-[15px] tracking-[0.5px] hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer"
             >
               CHECKOUT
             </button>
