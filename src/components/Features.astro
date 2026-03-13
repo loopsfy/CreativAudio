@@ -63,7 +63,7 @@ const sections = [
               muted
               playsinline
               preload="none"
-              class="w-full rounded-xl lazy-video"
+              class="w-full rounded-xl lazy-video cursor-pointer hover:opacity-90 transition-opacity"
             />
           ) : (
             <img
@@ -86,6 +86,11 @@ const sections = [
   </div>
 </section>
 
+<!-- Video Lightbox -->
+<div id="video-lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-10 cursor-pointer">
+  <video id="lightbox-video" loop muted playsinline class="max-w-full max-h-full rounded-xl cursor-default"></video>
+</div>
+
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -99,4 +104,36 @@ const sections = [
   }, { rootMargin: '200px' });
 
   document.querySelectorAll('.lazy-video').forEach((v) => observer.observe(v));
+
+  // Lightbox
+  const lightbox = document.getElementById('video-lightbox')!;
+  const lightboxVideo = document.getElementById('lightbox-video') as HTMLVideoElement;
+
+  document.querySelectorAll('.lazy-video').forEach((v) => {
+    v.addEventListener('click', () => {
+      const src = (v as HTMLVideoElement).src || (v as HTMLVideoElement).dataset.src!;
+      lightboxVideo.src = src;
+      lightboxVideo.play();
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+    });
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightboxVideo.pause();
+      lightboxVideo.src = '';
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+      lightboxVideo.pause();
+      lightboxVideo.src = '';
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+    }
+  });
 </script>
