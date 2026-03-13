@@ -1,37 +1,102 @@
 ---
-import { Waves, Sparkles, Sliders, Upload, Monitor, Zap } from "@lucide/astro";
-
-const features = [
-  { icon: Waves, title: "175 Ready-to-Use Presets", description: "Keys, Leads, Plucks, Bass, Synths, and Pads — 6 categories of professionally crafted sounds ready to drop into your beats." },
-  { icon: Sparkles, title: "Built-in Effects Chain", description: "Shape every preset with reverb, delay, dual-band filter, vibrato, and stutter effect — all built right into the plugin." },
-  { icon: Sliders, title: "Full ADSR Control", description: "Fine-tune attack, decay, sustain, and release on every sound. Plus vibrato with speed, depth, and flutter controls." },
-  { icon: Upload, title: "Drag & Drop Samples", description: "Load your own WAV, MP3, AIFF, OGG, or FLAC samples via drag and drop. Each instance saves its custom sample with your project." },
-  { icon: Monitor, title: "Waveform Visualization", description: "Real-time waveform display with live playhead animation so you can see exactly what you're playing." },
-  { icon: Zap, title: "Lightweight & Fast", description: "16-voice polyphony with mono/legato mode, octave shift, and ping-pong delay — all running smooth with low CPU usage." },
+const sections = [
+  {
+    title: "175 Ready-to-Use Presets",
+    paragraphs: [
+      "Keys, Leads, Plucks, Bass, Synths, and Pads. 6 categories of professionally crafted sounds ready to drop into your beats.",
+      "Each preset is designed to sit perfectly in a mix, giving you studio-quality tones right out of the box.",
+    ],
+    video: "/features/presets.mp4",
+    imageAlt: "Orbital preset browser",
+  },
+  {
+    title: "Built-in Effects Chain",
+    paragraphs: [
+      "Shape every preset with reverb, delay, dual-band filter, vibrato, and stutter effect. All built right into the plugin.",
+      "From ambient delay and reverb to creative modulation and stutter, each effect is built for sound design, not just post-processing.",
+    ],
+    video: "/features/effects.mp4",
+    imageAlt: "Orbital effects chain",
+  },
+  {
+    title: "Drag & Drop Your Own Samples",
+    paragraphs: [
+      "Load your own WAV, MP3, AIFF, OGG, or FLAC samples via drag and drop. Each instance saves its custom sample with your project.",
+      "Turn any sound into a playable instrument. Layer it with the built-in effects and shape it with full ADSR control.",
+    ],
+    video: "/features/samples.mp4",
+    imageAlt: "Orbital drag and drop samples",
+  },
+  {
+    title: "4 Color Skins. Make It Yours",
+    paragraphs: [
+      "Choose between 4 color skins: Orange, Blue, Green, and White. Customize the look of Orbital to match your workflow and aesthetic.",
+      "More skins will be added over time based on user requests. Your plugin, your style.",
+    ],
+    video: "/features/skins.mp4",
+    imageAlt: "Orbital color skins",
+  },
 ];
 ---
 
-<section id="features" class="flex flex-col items-center gap-12 md:gap-16 py-16 md:py-[100px] px-6 md:px-16 lg:px-[120px]">
+<section id="features" class="flex flex-col items-center gap-0 bg-white pb-16 md:pb-[100px]">
   <!-- Section Header -->
-  <div class="flex flex-col items-center gap-4 text-center" data-animate="fade-up">
+  <div class="flex flex-col items-center gap-4 text-center pt-16 md:pt-[100px] pb-8 md:pb-12 px-6 md:px-16 lg:px-[120px]" data-animate="fade-up">
     <span class="text-xs font-semibold text-accent tracking-[2px] uppercase">FEATURES</span>
-    <h2 class="font-heading text-3xl md:text-[48px] font-bold text-text-primary tracking-tight leading-tight">Designed for the Future of Sound</h2>
-    <p class="text-base md:text-lg text-text-body leading-relaxed text-center max-w-[600px]">
-      A sample-based synth plugin with everything you need to create — presets, effects, and your own samples, all in one place.
+    <h2 class="font-heading text-3xl md:text-[48px] font-bold text-[#111] tracking-tight leading-tight">Designed for the Future of Sound</h2>
+    <p class="text-base md:text-lg text-[#555] leading-relaxed text-center max-w-[600px]">
+      A sample-based synth plugin with everything you need to createpresets, effects, and your own samples, all in one place.
     </p>
   </div>
 
-  <!-- Feature Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-[1200px]" data-animate="stagger">
-    {features.map(({ icon: Icon, title, description }) => (
-      <div class="rounded-xl bg-[#0D0D0F] border border-white/10 p-8 flex flex-col gap-5 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_-20%,_rgba(255,92,0,0.08)_0%,_transparent_60%)]"></div>
-        <div class="relative">
-          <Icon size={24} class="text-accent" />
+  <!-- Feature Rows -->
+  <div class="flex flex-col gap-4 md:gap-6 w-full max-w-[1200px] mx-auto px-4 md:px-16 lg:px-[120px]">
+    {sections.map((section, i) => (
+      <div class={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-6 md:gap-12 rounded-2xl bg-[#f5f5f5] p-6 md:p-10`} data-animate="fade-up">
+        <!-- Media -->
+        <div class="w-full md:w-1/2 flex-shrink-0">
+          {section.video ? (
+            <video
+              data-src={section.video}
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="none"
+              class="w-full rounded-xl lazy-video"
+            />
+          ) : (
+            <img
+              src={section.image}
+              alt={section.imageAlt}
+              class="w-full rounded-xl"
+            />
+          )}
         </div>
-        <h3 class="text-lg font-semibold text-white relative">{title}</h3>
-        <p class="text-[15px] text-white/50 leading-relaxed relative">{description}</p>
+
+        <!-- Text -->
+        <div class="w-full md:w-1/2 flex flex-col gap-4">
+          <h3 class="font-heading text-2xl md:text-[32px] font-bold text-[#111] tracking-tight leading-tight">{section.title}</h3>
+          {section.paragraphs.map((p) => (
+            <p class="text-[15px] md:text-base text-[#555] leading-relaxed">{p}</p>
+          ))}
+        </div>
       </div>
     ))}
   </div>
 </section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const video = entry.target as HTMLVideoElement;
+        video.src = video.dataset.src!;
+        video.load();
+        observer.unobserve(video);
+      }
+    });
+  }, { rootMargin: '200px' });
+
+  document.querySelectorAll('.lazy-video').forEach((v) => observer.observe(v));
+</script>

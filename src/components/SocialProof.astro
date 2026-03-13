@@ -10,57 +10,57 @@ const stats = [
 
 const testimonials = [
   {
-    quote: "Orbital has completely transformed my production workflow. The oscillator engines are unlike anything I've used before.",
+    quote: "The 175 presets are insane. Keys, pads, leads, bass... I found sounds I actually use in every session. No filler at all.",
     author: "Alex Rivera",
     img: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=80&h=80&fit=crop&crop=face",
   },
   {
-    quote: "The spectral effects suite alone is worth the price. I've replaced three plugins with just Orbital.",
+    quote: "The built-in effects chain is a game changer. Reverb, delay, filter, vibrato and stutter all in one plugin. No need for extra sends.",
     author: "Sarah Chen",
     img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face",
   },
   {
-    quote: "Best synth plugin I've purchased in years. The preset morphing feature is absolutely game-changing.",
+    quote: "Drag and drop my own samples and they just work. I loaded a vocal chop and turned it into a whole playable instrument in seconds.",
     author: "Marcus Johnson",
     img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
   },
   {
-    quote: "I was skeptical at first, but Orbital blew me away. The sound quality is pristine and the CPU usage is incredibly low.",
+    quote: "Super lightweight on CPU. I can run multiple instances of Orbital without my laptop breaking a sweat. Perfect for live sets.",
     author: "Lena Krüger",
     img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=face",
   },
   {
-    quote: "The modulation system is insanely deep. Every time I open Orbital I discover something new. An absolute must-have.",
+    quote: "Love the 4 color skins. I switched to the blue one and it fits my dark theme perfectly. Small detail that makes a big difference.",
     author: "Davi Santos",
     img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&h=80&fit=crop&crop=face",
   },
   {
-    quote: "Replaced my entire synth chain with Orbital. The visual feedback engine makes sound design so intuitive.",
+    quote: "The waveform visualization is so helpful. Being able to see exactly what's playing while tweaking the ADSR makes sound design way faster.",
     author: "Jordan Park",
     img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face",
   },
   {
-    quote: "The 500+ presets are actually usable — not filler. I've already used Orbital on three commercial releases.",
+    quote: "175 presets across 6 categories and every single one sits well in a mix. I've already used Orbital on three commercial releases.",
     author: "Nia Okafor",
     img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&h=80&fit=crop&crop=face",
   },
   {
-    quote: "Hands down the best UI of any synth plugin. Everything is where you expect it to be. Intuitive and powerful.",
+    quote: "The UI is clean and intuitive. Full ADSR control, vibrato with speed and depth, everything right where you need it.",
     author: "David Lin",
     img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face",
   },
   {
-    quote: "Built an entire EP with just Orbital. From pads to leads to basses — it does everything and sounds incredible.",
+    quote: "Built an entire EP with just Orbital. From pads to leads to basses, the presets cover everything and the effects add so much depth.",
     author: "Mika Tanaka",
     img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=80&h=80&fit=crop&crop=face",
   },
   {
-    quote: "The preset morphing is witchcraft. Blending between sounds in real-time opened up a whole new dimension for my live sets.",
+    quote: "One-time payment, free lifetime updates, and it works on both Windows and macOS. Honestly the best value plugin I've bought this year.",
     author: "Carlos Vega",
     img: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=80&h=80&fit=crop&crop=face",
   },
   {
-    quote: "Worth every penny. Orbital replaced half my plugin folder and sounds better than all of them combined.",
+    quote: "I loaded my own WAV samples via drag and drop and layered them with the stutter effect. The results were incredible. Worth every penny.",
     author: "Emma Whitfield",
     img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face",
   },
@@ -75,11 +75,11 @@ const testimonials = [
   </div>
 
   <!-- Stats Row -->
-  <div class="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-8 md:gap-20 w-full" data-animate="stagger">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full max-w-[800px]" data-animate="stagger">
     {stats.map((stat) => (
-      <div class="flex flex-col items-center gap-1">
-        <span class="text-3xl md:text-4xl font-heading font-bold text-text-primary">{stat.value}</span>
-        <span class="text-sm text-text-body">{stat.label}</span>
+      <div class="flex flex-col items-center gap-1.5 rounded-xl bg-gradient-to-b from-[#4d2a12] to-[#161618] border border-accent/40 py-6 px-5">
+        <span class="text-2xl md:text-3xl font-heading font-bold text-white">{stat.value}</span>
+        <span class="text-xs md:text-sm text-text-body tracking-wide">{stat.label}</span>
       </div>
     ))}
   </div>
