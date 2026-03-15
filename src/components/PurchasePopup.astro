@@ -81,8 +81,8 @@ const timeAgo = [
           popup.classList.remove('md:block');
           popup.classList.add('hidden', 'md:hidden');
           currentIndex++;
-          // Show next after 8-15 seconds
-          timeoutId = setTimeout(showPopup, 8000 + Math.random() * 7000);
+          // Show next after 5 seconds
+          timeoutId = setTimeout(showPopup, 5000);
         }, 500);
       }, 4000);
     }

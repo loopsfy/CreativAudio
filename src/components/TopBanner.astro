@@ -1,0 +1,35 @@
+<!-- Top Banner - Launch Offer Countdown -->
+<div id="top-banner" class="w-full bg-[#111111] py-2.5 px-4 flex items-center justify-center gap-3 md:gap-4 z-[60] sticky top-0">
+  <span class="text-[11px] md:text-[13px] font-semibold text-white tracking-[1.5px] uppercase flex items-center gap-2">
+    <span class="text-accent">&#x1F525;</span>
+    LAUNCH OFFER ENDS IN
+    <span class="text-accent">&#x1F525;</span>
+  </span>
+  <div class="flex items-center gap-1" id="banner-timer">
+    <span class="bg-white/15 text-white text-[11px] md:text-[13px] font-mono font-bold rounded px-1.5 py-0.5 min-w-[28px] text-center" id="banner-hrs">00</span>
+    <span class="text-white/40 text-[11px] font-bold">:</span>
+    <span class="bg-white/15 text-white text-[11px] md:text-[13px] font-mono font-bold rounded px-1.5 py-0.5 min-w-[28px] text-center" id="banner-min">00</span>
+    <span class="text-white/40 text-[11px] font-bold">:</span>
+    <span class="bg-white/15 text-white text-[11px] md:text-[13px] font-mono font-bold rounded px-1.5 py-0.5 min-w-[28px] text-center" id="banner-sec">00</span>
+  </div>
+</div>
+
+<script>
+  function updateBannerCountdown() {
+    const now = new Date();
+    const endOfDay = new Date(now);
+    endOfDay.setHours(23, 59, 59, 999);
+    const diff = endOfDay.getTime() - now.getTime();
+
+    const hrs = Math.floor(diff / (1000 * 60 * 60));
+    const min = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const sec = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("banner-hrs")!.textContent = String(hrs).padStart(2, "0");
+    document.getElementById("banner-min")!.textContent = String(min).padStart(2, "0");
+    document.getElementById("banner-sec")!.textContent = String(sec).padStart(2, "0");
+  }
+
+  updateBannerCountdown();
+  setInterval(updateBannerCountdown, 1000);
+</script>

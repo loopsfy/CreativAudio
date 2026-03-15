@@ -13,6 +13,7 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import "../styles/global.css";
 import PurchasePopup from "../components/PurchasePopup.astro";
+import TopBanner from "../components/TopBanner.astro";
 
 interface Props {
   title: string;
@@ -64,6 +65,7 @@ const {
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1691395288886718&ev=PageView&noscript=1" /></noscript>
   </head>
   <body class="bg-bg text-text-primary font-body">
+    <TopBanner />
     <slot />
     <PurchasePopup />
   </body>
