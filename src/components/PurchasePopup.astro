@@ -1,0 +1,103 @@
+---
+const buyers = [
+  "Alex R.", "Sarah C.", "Marcus J.", "Lena K.", "Davi S.",
+  "Jordan P.", "Nia O.", "David L.", "Mika T.", "Carlos V.",
+  "Emma W.", "James H.", "Sofia M.", "Ryan B.", "Olivia G.",
+  "Lucas F.", "Amara N.", "Ethan D.", "Chloe P.", "Noah W.",
+];
+
+const timeAgo = [
+  "1 hour ago", "2 hours ago", "3 hours ago", "5 hours ago",
+  "6 hours ago", "8 hours ago", "12 hours ago", "1 day ago",
+  "1 day ago", "2 days ago",
+];
+---
+
+<!-- Purchase notification popup - desktop only -->
+<div
+  id="purchase-popup"
+  class="hidden md:hidden fixed bottom-6 left-6 z-50 bg-card border border-border rounded-xl shadow-lg px-5 py-4 max-w-[320px] transition-all duration-500 opacity-0 translate-y-4"
+>
+  <button
+    id="purchase-popup-close"
+    class="absolute top-2 right-3 text-text-light hover:text-text-primary text-sm cursor-pointer"
+    aria-label="Close"
+  >&times;</button>
+  <div class="flex items-center gap-3">
+    <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+    </div>
+    <div class="flex flex-col gap-0.5">
+      <span class="text-sm font-semibold text-text-primary" id="popup-buyer"></span>
+      <span class="text-xs text-text-body">purchased <span class="font-semibold text-accent">Orbital</span></span>
+      <span class="text-[11px] text-text-light" id="popup-time"></span>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ buyers, timeAgo }}>
+  const popup = document.getElementById('purchase-popup');
+  const buyerEl = document.getElementById('popup-buyer');
+  const timeEl = document.getElementById('popup-time');
+  const closeBtn = document.getElementById('purchase-popup-close');
+
+  // Only run on desktop (md breakpoint = 768px)
+  if (window.innerWidth < 768) {
+    // Don't initialize on mobile
+  } else {
+    let currentIndex = 0;
+    let timeoutId = null;
+    let dismissed = false;
+
+    // Shuffle buyers
+    const shuffled = [...buyers].sort(() => Math.random() - 0.5);
+
+    function showPopup() {
+      if (dismissed) return;
+
+      const buyer = shuffled[currentIndex % shuffled.length];
+      const time = timeAgo[currentIndex % timeAgo.length];
+
+      buyerEl.textContent = buyer;
+      timeEl.textContent = time;
+
+      // Show
+      popup.classList.remove('hidden', 'md:hidden');
+      popup.classList.add('md:block');
+      requestAnimationFrame(() => {
+        popup.classList.remove('opacity-0', 'translate-y-4');
+        popup.classList.add('opacity-100', 'translate-y-0');
+      });
+
+      // Hide after 4 seconds
+      timeoutId = setTimeout(() => {
+        popup.classList.remove('opacity-100', 'translate-y-0');
+        popup.classList.add('opacity-0', 'translate-y-4');
+        setTimeout(() => {
+          popup.classList.remove('md:block');
+          popup.classList.add('hidden', 'md:hidden');
+          currentIndex++;
+          // Show next after 8-15 seconds
+          timeoutId = setTimeout(showPopup, 8000 + Math.random() * 7000);
+        }, 500);
+      }, 4000);
+    }
+
+    closeBtn.addEventListener('click', () => {
+      dismissed = true;
+      if (timeoutId) clearTimeout(timeoutId);
+      popup.classList.remove('opacity-100', 'translate-y-0');
+      popup.classList.add('opacity-0', 'translate-y-4');
+      setTimeout(() => {
+        popup.classList.add('hidden');
+      }, 500);
+    });
+
+    // First popup after 5 seconds
+    setTimeout(showPopup, 5000);
+  }
+</script>
