@@ -141,7 +141,7 @@ export default function CartDrawer() {
                     currency: "USD",
                   });
                 }
-                window.location.href = "https://creativ-audio.myshopify.com/cart/10702189363537:1";
+                window.location.href = "https://creativ-audio.myshopify.com/cart/53297424367953:1";
               }}
               className="w-full py-3.5 rounded-md bg-gradient-to-r from-[#FF5C00] to-[#FF8A4C] text-white font-semibold text-[15px] tracking-[0.5px] hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer"
             >
