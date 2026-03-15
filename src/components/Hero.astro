@@ -44,62 +44,14 @@ import { ArrowRight } from "@lucide/astro";
   </a>
 
   <!-- Product video -->
-  <div class="w-full max-w-[900px] rounded-xl border border-border overflow-hidden relative z-10 aspect-video cursor-pointer group" id="hero-video-container">
+  <div class="w-full max-w-[900px] rounded-xl border border-border overflow-hidden relative z-10 aspect-video">
     <iframe
       src="https://drive.google.com/file/d/1lcVo2PW-4CJnUY-2ogUNbmJRJkwR-i11/preview"
-      class="w-full h-full pointer-events-none"
+      class="w-full h-full"
       allow="autoplay"
       allowfullscreen
     ></iframe>
-    <!-- Play overlay -->
-    <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors duration-300">
-      <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 active:scale-95 transition-transform duration-200 shadow-lg">
-        <svg class="w-7 h-7 md:w-8 md:h-8 text-[#111111] ml-1" viewBox="0 0 24 24" fill="currentColor">
-          <polygon points="5,3 19,12 5,21" />
-        </svg>
-      </div>
-    </div>
   </div>
-
-  <!-- Hero Video Lightbox -->
-  <div id="hero-video-lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-10 cursor-pointer">
-    <div class="w-full max-w-[1100px] aspect-video rounded-xl overflow-hidden cursor-default">
-      <iframe
-        id="hero-lightbox-iframe"
-        class="w-full h-full"
-        allow="autoplay"
-        allowfullscreen
-      ></iframe>
-    </div>
-  </div>
-
-  <script>
-    const heroContainer = document.getElementById('hero-video-container')!;
-    const heroLightbox = document.getElementById('hero-video-lightbox')!;
-    const heroLightboxIframe = document.getElementById('hero-lightbox-iframe') as HTMLIFrameElement;
-
-    heroContainer.addEventListener('click', () => {
-      heroLightboxIframe.src = 'https://drive.google.com/file/d/1lcVo2PW-4CJnUY-2ogUNbmJRJkwR-i11/preview';
-      heroLightbox.classList.remove('hidden');
-      heroLightbox.classList.add('flex');
-    });
-
-    heroLightbox.addEventListener('click', (e) => {
-      if (e.target === heroLightbox) {
-        heroLightboxIframe.src = '';
-        heroLightbox.classList.add('hidden');
-        heroLightbox.classList.remove('flex');
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !heroLightbox.classList.contains('hidden')) {
-        heroLightboxIframe.src = '';
-        heroLightbox.classList.add('hidden');
-        heroLightbox.classList.remove('flex');
-      }
-    });
-  </script>
 
   <!-- DAW Compatibility row -->
   <div class="flex items-center gap-4 md:gap-8 py-5 flex-wrap justify-center relative z-10">
