@@ -24,6 +24,22 @@ async function shopifyFetch(query: string, variables: Record<string, any> = {}) 
 // Product variant GID for Orbital
 export const ORBITAL_VARIANT_ID = "gid://shopify/ProductVariant/53297424367953";
 
+export async function createEmptyCart() {
+  const query = `
+    mutation cartCreate($input: CartInput!) {
+      cartCreate(input: $input) {
+        cart {
+          id
+          checkoutUrl
+        }
+        userErrors { field message }
+      }
+    }
+  `;
+  const data = await shopifyFetch(query, { input: {} });
+  return data.cartCreate.cart;
+}
+
 export async function createCart(variantId: string, quantity: number = 1) {
   const query = `
     mutation cartCreate($input: CartInput!) {

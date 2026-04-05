@@ -1,6 +1,7 @@
 import { atom, computed } from "nanostores";
 import {
   createCart,
+  createEmptyCart,
   addCartLines,
   updateCartLines,
   removeCartLines,
@@ -65,21 +66,31 @@ function syncCartFromShopify(cart: any) {
   $cartItems.set(items);
 }
 
-// Restore cart from localStorage on page load
+// Restore or create cart on page load (registers session in Shopify)
 export async function initCart() {
   const storedId = getStoredCartId();
   if (storedId) {
     try {
       const cart = await getCart(storedId);
-      if (cart && cart.lines.edges.length > 0) {
+      if (cart) {
         $shopifyCartId.set(storedId);
         syncCartFromShopify(cart);
         return;
       }
     } catch {
-      // Cart expired or invalid, will create new one on add
+      // Cart expired or invalid
     }
     localStorage.removeItem("shopify_cart_id");
+  }
+
+  // No existing cart — create empty one to register session in Shopify
+  try {
+    const cart = await createEmptyCart();
+    if (cart) {
+      saveCartId(cart.id);
+    }
+  } catch {
+    // Silent fail — doesn't affect UX
   }
 }
 
