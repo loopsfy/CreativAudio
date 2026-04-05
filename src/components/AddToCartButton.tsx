@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { addToCart } from "../stores/cart";
+import { addToCart, $cartLoading } from "../stores/cart";
+import { useStore } from "@nanostores/react";
 
 export default function AddToCartButton() {
   const [added, setAdded] = useState(false);
+  const loading = useStore($cartLoading);
 
-  function handleClick() {
-    addToCart();
+  async function handleClick() {
+    if (loading) return;
+
+    await addToCart();
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
 
@@ -23,9 +27,12 @@ export default function AddToCartButton() {
   return (
     <button
       onClick={handleClick}
+      disabled={loading}
       className={`w-full inline-flex items-center justify-center gap-2 rounded-md px-8 py-4 text-[15px] font-semibold text-white tracking-[1px] transition-all duration-300 ${
         added
           ? "bg-green-500 scale-[1.02]"
+          : loading
+          ? "bg-gray-400 cursor-wait"
           : "bg-gradient-to-r from-[#FF5C00] to-[#FF8A4C] hover:opacity-90"
       }`}
     >
@@ -45,6 +52,8 @@ export default function AddToCartButton() {
           </svg>
           ADDED!
         </>
+      ) : loading ? (
+        "ADDING..."
       ) : (
         <>
           ADD TO CART

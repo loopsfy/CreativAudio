@@ -1,11 +1,15 @@
 import { useStore } from "@nanostores/react";
+import { useEffect } from "react";
 import {
   $cartOpen,
   $cartItems,
   $cartCount,
   $cartTotal,
+  $cartLoading,
   removeFromCart,
   updateQuantity,
+  getCheckoutUrl,
+  initCart,
 } from "../stores/cart";
 
 export default function CartDrawer() {
@@ -13,6 +17,12 @@ export default function CartDrawer() {
   const items = useStore($cartItems);
   const count = useStore($cartCount);
   const total = useStore($cartTotal);
+  const loading = useStore($cartLoading);
+
+  // Restore Shopify cart on mount
+  useEffect(() => {
+    initCart();
+  }, []);
 
   return (
     <>
@@ -78,7 +88,8 @@ export default function CartDrawer() {
                           onClick={() =>
                             updateQuantity(item.id, item.quantity - 1)
                           }
-                          className="px-2.5 py-1 text-sm text-[#555555] hover:text-[#111111]"
+                          disabled={loading}
+                          className="px-2.5 py-1 text-sm text-[#555555] hover:text-[#111111] disabled:opacity-50"
                         >
                           −
                         </button>
@@ -89,7 +100,8 @@ export default function CartDrawer() {
                           onClick={() =>
                             updateQuantity(item.id, item.quantity + 1)
                           }
-                          className="px-2.5 py-1 text-sm text-[#555555] hover:text-[#111111]"
+                          disabled={loading}
+                          className="px-2.5 py-1 text-sm text-[#555555] hover:text-[#111111] disabled:opacity-50"
                         >
                           +
                         </button>
@@ -112,7 +124,8 @@ export default function CartDrawer() {
                   {/* Remove */}
                   <button
                     onClick={() => removeFromCart(item.id)}
-                    className="text-[#CCCCCC] hover:text-[#FF5C00] transition-colors self-start text-lg"
+                    disabled={loading}
+                    className="text-[#CCCCCC] hover:text-[#FF5C00] transition-colors self-start text-lg disabled:opacity-50"
                   >
                     &times;
                   </button>
@@ -141,7 +154,7 @@ export default function CartDrawer() {
                     currency: "USD",
                   });
                 }
-                window.location.href = "https://creativ-audio.myshopify.com/cart/53297424367953:1";
+                window.location.href = getCheckoutUrl();
               }}
               className="w-full py-3.5 rounded-md bg-gradient-to-r from-[#FF5C00] to-[#FF8A4C] text-white font-semibold text-[15px] tracking-[0.5px] hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer"
             >
