@@ -3,7 +3,7 @@ import { Check } from "@lucide/astro";
 import AddToCartButton from "./AddToCartButton";
 
 const features = [
-  "175 Ready-to-Use Presets",
+  "175 Presets Sampled from Real Analog Synths",
   "5 Built-in Effects (Reverb, Delay, Filter, Vibrato, Stutter)",
   "4 Color Skins",
   "Drag & Drop Your Own Samples",
@@ -62,7 +62,7 @@ const features = [
   <!-- Pricing Card -->
   <div class="rounded-xl bg-[#161618] border border-white/10 p-7 flex flex-col gap-3 w-full max-w-[360px] items-center" data-animate="scale-in">
     <!-- Product Image -->
-    <img src="/orbital-plugin.png" alt="Orbital Plugin" class="w-full rounded-lg -mt-8 -mb-6" />
+    <img src="/orbital-plugin.webp" alt="Orbital Plugin" class="w-full aspect-square object-cover rounded-lg" />
 
     <!-- Plan Name -->
     <span class="text-lg font-heading font-bold text-white tracking-[1px]">GET ORBITAL</span>
@@ -90,6 +90,12 @@ const features = [
 
   <!-- Platform Support -->
   <span class="text-sm text-white/50" data-animate="fade-up">VST3 / AU Support (Windows & macOS)</span>
+
+  <!-- Money-Back Guarantee -->
+  <div class="flex items-center gap-2.5 mt-2" data-animate="fade-up">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+    <span class="text-sm text-white/50">15-Day Money-Back Guarantee — No Questions Asked</span>
+  </div>
 </section>
 
 <style>

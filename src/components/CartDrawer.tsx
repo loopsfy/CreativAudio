@@ -66,7 +66,7 @@ export default function CartDrawer() {
                 <div key={item.id} className="flex gap-4">
                   {/* Product image */}
                   <img
-                    src="/orbital-plugin.png"
+                    src="/orbital-plugin.webp"
                     alt="Orbital"
                     className="w-20 h-20 rounded-lg object-cover shrink-0"
                   />
