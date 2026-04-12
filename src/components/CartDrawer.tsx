@@ -154,6 +154,19 @@ export default function CartDrawer() {
                     currency: "USD",
                   });
                 }
+                // GA4: begin_checkout event
+                if (typeof window !== "undefined" && (window as any).gtag) {
+                  (window as any).gtag("event", "begin_checkout", {
+                    currency: "USD",
+                    value: total,
+                    items: items.map((item) => ({
+                      item_id: item.id,
+                      item_name: item.name,
+                      price: item.price,
+                      quantity: item.quantity,
+                    })),
+                  });
+                }
                 window.location.href = getCheckoutUrl();
               }}
               className="w-full py-3.5 rounded-md bg-gradient-to-r from-[#FF5C00] to-[#FF8A4C] text-white font-semibold text-[15px] tracking-[0.5px] hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer"

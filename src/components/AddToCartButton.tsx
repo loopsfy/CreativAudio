@@ -22,6 +22,15 @@ export default function AddToCartButton() {
         currency: "USD",
       });
     }
+
+    // GA4: add_to_cart event
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "add_to_cart", {
+        currency: "USD",
+        value: 49,
+        items: [{ item_id: "orbital", item_name: "Orbital", price: 49, quantity: 1 }],
+      });
+    }
   }
 
   return (

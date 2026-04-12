@@ -49,6 +49,15 @@ const {
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- Google Analytics (GA4) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-C23SQ2721Y"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-C23SQ2721Y');
+    </script>
+
     <!-- Meta Pixel -->
     <script is:inline>
       !function(f,b,e,v,n,t,s)
