@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(cmd.exe /c 'copy /Y \"C:\\\\Users\\\\zepid\\\\Documents\\\\email_tmp4.html\" \"C:\\\\Users\\\\zepid\\\\OneDrive\\\\Documentos\\\\email.html\"' 2>&1)",
+      "Bash(powershell.exe -Command \"Copy-Item -Path 'C:\\\\Users\\\\zepid\\\\Documents\\\\email_tmp4.html' -Destination 'C:\\\\Users\\\\zepid\\\\OneDrive\\\\Documentos\\\\email.html' -Force\" 2>&1)",
+      "Bash(grep -E \"\\\\.\\(astro|tsx|ts|jsx|js\\)$\")",
+      "Bash(npx vercel:*)"
+    ]
+  }
+}
