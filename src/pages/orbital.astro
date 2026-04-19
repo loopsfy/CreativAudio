@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import OrbitalDarkHeader from "../components/OrbitalDarkHeader.astro";
+import OrbitalDarkHero from "../components/OrbitalDarkHero.astro";
+import OrbitalDarkPresets from "../components/OrbitalDarkPresets.astro";
+import OrbitalDarkFeatures from "../components/OrbitalDarkFeatures.astro";
+import OrbitalDarkBonus from "../components/OrbitalDarkBonus.astro";
+import OrbitalDarkSocial from "../components/OrbitalDarkSocial.astro";
+import OrbitalDarkPricing from "../components/OrbitalDarkPricing.astro";
+import OrbitalDarkFAQ from "../components/OrbitalDarkFAQ.astro";
+import OrbitalDarkFooter from "../components/OrbitalDarkFooter.astro";
+import ScrollAnimations from "../components/ScrollAnimations.astro";
+import CartDrawer from "../components/CartDrawer";
+---
+
+<Layout
+  title="Orbital Plugin Collection — Premium Analog Synth Presets | CreativAudio"
+  description="175 presets sampled from real analog hardware — Juno-106, Prophet-5, Minimoog, Jupiter-8. Built-in effects, drag & drop samples, VST3 / AU."
+>
+  <OrbitalDarkHeader />
+  <main class="bg-[#050507]">
+    <OrbitalDarkHero />
+    <OrbitalDarkPresets />
+    <OrbitalDarkFeatures />
+    <OrbitalDarkBonus />
+    <OrbitalDarkSocial />
+    <OrbitalDarkPricing />
+    <OrbitalDarkFAQ />
+  </main>
+  <OrbitalDarkFooter />
+  <CartDrawer client:load />
+  <ScrollAnimations />
+</Layout>
+
+<style is:global>
+  /* Dark page body override */
+  body:has(main.bg-\[\#050507\]) {
+    background: #050507;
+  }
+</style>

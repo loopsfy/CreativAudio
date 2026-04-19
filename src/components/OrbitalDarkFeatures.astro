@@ -1,0 +1,146 @@
+---
+const sections = [
+  {
+    title: "Recorded from Real Analog Hardware",
+    paragraphs: [
+      "Every one of the 175 presets was sampled from legendary synths: the Juno-106, Prophet-5, Minimoog, and Jupiter-8 — over $10,000 of real hardware used on hits by Daft Punk and Tame Impala.",
+      "Pure analog warmth and character you simply won't find in digital-only plugins.",
+    ],
+    video: "/features/presets.mp4",
+    tag: "175 PRESETS",
+  },
+  {
+    title: "Built-in Effects Engine",
+    paragraphs: [
+      "Shape every sound with five integrated effects: reverb, delay, dual-band filter, vibrato, and stutter. No extra plugins, no routing — everything lives inside Orbital.",
+      "From ambient texture to creative modulation, each effect is designed for sound design, not just post-processing.",
+    ],
+    video: "/features/effects.mp4",
+    tag: "5 EFFECTS",
+  },
+  {
+    title: "Drag & Drop Your Own Samples",
+    paragraphs: [
+      "Load WAV, MP3, AIFF, OGG, or FLAC files directly into Orbital. Each instance saves the custom sample with your project — so nothing gets lost.",
+      "Turn any sound into a playable instrument, then shape it with the built-in effects and full ADSR control.",
+    ],
+    video: "/features/samples.mp4",
+    tag: "ANY SAMPLE",
+  },
+  {
+    title: "Four Color Skins. Your Aesthetic.",
+    paragraphs: [
+      "Choose between four carefully designed skins — Orange, Blue, Green, and White — to match your workflow and visual setup.",
+      "New skins are added over time based on user requests. Your plugin, your style.",
+    ],
+    video: "/features/skins.mp4",
+    tag: "CUSTOM LOOK",
+  },
+];
+---
+
+<section id="features" class="relative bg-[#08080A] py-20 md:py-[120px] px-6 md:px-16 lg:px-[120px] overflow-hidden">
+  <!-- Ambient glows (match Bonus section) -->
+  <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,92,0,0.12),transparent_60%)] blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle_at_center,rgba(120,60,255,0.1),transparent_60%)] blur-3xl pointer-events-none"></div>
+
+  <div class="absolute inset-0 pointer-events-none opacity-[0.04]"
+       style="background-image: linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+
+  <div class="relative z-10 max-w-[1200px] mx-auto">
+    <!-- Section Header -->
+    <div class="flex flex-col items-center gap-4 text-center mb-16 md:mb-20" data-animate="fade-up">
+      <span class="text-xs font-semibold text-accent tracking-[2px] uppercase">Inside Orbital</span>
+      <h2 class="font-heading text-3xl md:text-[52px] font-bold text-white tracking-[-1.5px] leading-[1.05]">
+        Built for <span class="bg-gradient-to-r from-accent to-accent-end bg-clip-text text-transparent">Professional Production.</span>
+      </h2>
+      <p class="text-base md:text-lg text-white/60 leading-relaxed max-w-[640px]">
+        Every detail engineered for instant usability and musical inspiration — from the analog source material to the built-in effects chain.
+      </p>
+    </div>
+
+    <!-- Feature Rows -->
+    <div class="flex flex-col gap-4 md:gap-6">
+      {sections.map((section, i) => (
+        <div
+          class={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-6 md:gap-12 rounded-2xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,92,0,0.12)_0%,rgba(18,18,25,0.95)_45%,rgba(18,18,25,0.95)_55%,rgba(120,60,255,0.14)_100%)] p-6 md:p-10 backdrop-blur-sm`}
+          data-animate="fade-up"
+        >
+          <div class="w-full md:w-1/2 flex-shrink-0">
+            <video
+              data-src={section.video}
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="none"
+              class="w-full rounded-xl lazy-video-dark cursor-pointer hover:opacity-90 transition-opacity border border-white/5"
+            />
+          </div>
+
+          <div class="w-full md:w-1/2 flex flex-col gap-4">
+            <span class="self-start font-mono text-[11px] font-medium text-accent tracking-[2px] uppercase rounded-full border border-accent/30 bg-accent/10 px-3 py-1">
+              {section.tag}
+            </span>
+            <h3 class="font-heading text-2xl md:text-[32px] font-bold text-white tracking-tight leading-tight">{section.title}</h3>
+            {section.paragraphs.map((p) => (
+              <p class="text-[15px] md:text-base text-white/60 leading-relaxed">{p}</p>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Video Lightbox -->
+<div id="dark-video-lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-10 cursor-pointer">
+  <video id="dark-lightbox-video" loop muted playsinline class="max-w-full max-h-full rounded-xl cursor-default"></video>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const video = entry.target as HTMLVideoElement;
+        video.src = video.dataset.src!;
+        video.load();
+        observer.unobserve(video);
+      }
+    });
+  }, { rootMargin: '200px' });
+
+  document.querySelectorAll('.lazy-video-dark').forEach((v) => observer.observe(v));
+
+  const lightbox = document.getElementById('dark-video-lightbox')!;
+  const lightboxVideo = document.getElementById('dark-lightbox-video') as HTMLVideoElement;
+
+  document.querySelectorAll('.lazy-video-dark').forEach((v) => {
+    v.addEventListener('click', () => {
+      const src = (v as HTMLVideoElement).src || (v as HTMLVideoElement).dataset.src!;
+      lightboxVideo.src = src;
+      lightboxVideo.play();
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+    });
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightboxVideo.pause();
+      lightboxVideo.src = '';
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+      lightboxVideo.pause();
+      lightboxVideo.src = '';
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+    }
+  });
+</script>

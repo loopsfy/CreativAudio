@@ -1,0 +1,303 @@
+---
+import { Play, Pause, Lock } from "@lucide/astro";
+
+const megapackName = "Origin Megapack";
+
+const contents = [
+  {
+    id: "drumloops",
+    name: "Drumloops",
+    tagline: "Professional Level Drum Loops for Trap, R&B, Afrobeat & Reggaeton",
+    copy: "A wide range of polished Trap, R&B, Afrobeat and Reggaeton drum loops engineered to drop directly into your session and start inspiring ideas instantly. Every loop is mixed for clarity, punch, and groove, so you don't need to touch a single knob to make them sit right. Use them to spark new rhythm concepts or as the backbone for full drum arrangements.",
+    previews: [
+      { label: "Vuelve — 92 BPM", file: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Loopsfy_-_Vuelve_Drum_Loop_-_92_BPM.mp3?v=1776598852" },
+      { label: "Bahamas — 102 BPM", file: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Loopsfy_-_Bahamas_Drum_Loop_-_102_BPM.mp3?v=1776598931" },
+    ],
+    image: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/4_drumloop.png?v=1776523199",
+  },
+  {
+    id: "samples",
+    name: "Samples",
+    tagline: "Melody Samples and One-Shots Across Every Mood",
+    copy: "Curated melody loops and tonal one-shots ready to chop, layer, or flip. Each sample is delivered in key and tempo-flexible so you can drop it straight into your beat and start building strong melodic ideas fast.",
+    previews: [
+      { label: "Cartel — 145 BPM, B Min", file: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Trap_Loopsfy_-_Cartel_145_Bpm_B_Min.mp3?v=1776598853" },
+      { label: "Your Mind — 140 BPM, D Min", file: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/R_B_Loopsfy_-_Your_Mind_140_Bpm_D_Min.mp3?v=1776598853" },
+    ],
+    image: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/5_melody_loops.png?v=1776523199",
+  },
+  {
+    id: "analog-lab",
+    name: "Analog Lab Bank",
+    tagline: "Custom Analog Lab Bank with Authentic Analog Presets",
+    copy: "A handcrafted preset bank built for Arturia Analog Lab. Dozens of instantly-playable analog sounds covering keys, pads, leads, and bass, ready to load into any session. Compatible with Analog Lab V.",
+    previews: [
+      { label: "Martini Preset", file: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/ANALOG_LAB_PRESET_MARTINI.mp3?v=1776598852" },
+      { label: "La Plena Bass", file: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/ANALOG_LAB_PRESET_LA_PLENA_BASS.mp3?v=1776598852" },
+    ],
+    image: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/8_analog_bank.png?v=1776523199",
+  },
+  {
+    id: "trap-drum-kit",
+    name: "Trap Drum Kit",
+    tagline: "Complete Trap Drum Kit with Kicks, Snares, 808s, Hats and More",
+    copy: "A full Trap drum kit covering Kicks, Snares, 808s, Hats, Open Hats and more. Every hit is mixed loud and mix-ready so you can drop them straight into your beat and build hard-hitting trap patterns that cut through the mix without any extra processing.",
+    previews: [
+      { label: "Kick Solo", file: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Loopsfy_Kick_Solo.mp3?v=1776598851" },
+      { label: "808 Duro", file: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Loopsfy_808_Duro.mp3?v=1776598851" },
+    ],
+    image: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/6_trap_drumkit.png?v=1776523199",
+  },
+  {
+    id: "fx-collection",
+    name: "FX Collection",
+    tagline: "Melodic Phrases, FX and Accents in One Collection",
+    copy: "Catchy melodic phrases to add instant vibe. Perfect for layering, flipping, or building full samples around. Saves time and sparks ideas fast. Just drag in a phrase and get your beat going without overthinking.",
+    previews: [
+      { label: "Redemption Phrase — 140 BPM, B Min", file: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Loopsfy_Phrases_Redemption__140BPM_Bmin.mp3?v=1776598852" },
+      { label: "Tunnel Vision Accent — B Min", file: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Loopsfy_Accents_TunnelVision_Bmin.mp3?v=1776598852" },
+    ],
+    image: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/7_fx_collection.png?v=1776523199",
+  },
+];
+---
+
+<section id="bonus" class="relative bg-[#08080A] py-16 md:py-[90px] px-6 md:px-16 lg:px-[120px] overflow-hidden">
+  <!-- Ambient glow -->
+  <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,92,0,0.12),transparent_60%)] blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle_at_center,rgba(120,60,255,0.1),transparent_60%)] blur-3xl pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-[1200px] mx-auto">
+    <!-- Section Header -->
+    <div class="flex flex-col items-center gap-3 text-center mb-6" data-animate="fade-up">
+      <div class="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5">
+        <Lock size={12} class="text-accent" />
+        <span class="font-mono text-[11px] font-medium tracking-[2px] uppercase text-accent">Best Value Exclusive</span>
+      </div>
+      <h2 class="font-heading text-3xl md:text-[52px] font-bold text-white tracking-[-1.5px] leading-[1.05]">
+        <span class="bg-gradient-to-r from-accent to-accent-end bg-clip-text text-transparent">{megapackName}</span> Included
+      </h2>
+      <p class="text-base md:text-lg text-white/60 leading-relaxed max-w-[680px]">
+        Choose the <span class="text-white font-medium">Orbital + Origin Megapack</span> bundle and unlock a 100% royalty-free multi-genre collection of <span class="text-white">samples</span>, <span class="text-white">drums</span>, <span class="text-white">FX</span> and <span class="text-white">presets</span> — focused on R&amp;B, Trap, Afrobeat and Reggaeton, mixed to pro standards so you can build unique beats from day one.
+      </p>
+    </div>
+
+    <!-- Content Tabs Grid -->
+    <div class="flex md:grid md:grid-cols-5 gap-2 md:gap-3 mb-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-6 md:mx-0 px-6 md:px-0 pb-2 md:pb-0 scrollbar-thin">
+      {contents.map((c, i) => (
+        <button
+          class="pack-tab group relative shrink-0 md:shrink w-[30%] md:w-auto aspect-square rounded-xl overflow-hidden border border-white/10 hover:border-accent/60 transition-all cursor-pointer snap-start bg-black"
+          data-pack-tab={c.id}
+          data-active={i === 0 ? "true" : "false"}
+        >
+          <img src={c.image} alt={c.name} loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" />
+          <!-- Pro gradient wash: warm accent from bottom-left, cool violet from top-right -->
+          <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,92,0,0.18)_0%,transparent_40%,rgba(120,60,255,0.15)_100%)] mix-blend-overlay pointer-events-none"></div>
+          <!-- Bottom fade for text legibility -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent pointer-events-none"></div>
+          <!-- Top edge highlight -->
+          <div class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/[0.08] to-transparent pointer-events-none"></div>
+          <div class="absolute inset-0 flex items-end p-3">
+            <span class="font-heading text-xs md:text-sm font-bold text-white tracking-tight text-left leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{c.name}</span>
+          </div>
+          <div class="pack-active-ring absolute inset-0 rounded-xl ring-2 ring-white ring-offset-2 ring-offset-[#08080A] opacity-0 transition-opacity pointer-events-none shadow-[0_0_24px_-2px_rgba(255,255,255,0.35)]"></div>
+        </button>
+      ))}
+    </div>
+
+    <!-- Featured Display -->
+    <div id="bonus-megapack" class="grid grid-cols-1 md:grid-cols-[minmax(0,340px)_minmax(0,1fr)] gap-6 md:gap-10 rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-10 backdrop-blur-sm" data-animate="fade-in">
+      <!-- Artwork -->
+      <div class="relative w-full">
+        {contents.map((c, i) => (
+          <div
+            class={`pack-artwork absolute inset-0 ${i === 0 ? "" : "opacity-0"} transition-opacity duration-500`}
+            data-pack-artwork={c.id}
+          >
+            <div class="w-full aspect-square rounded-xl overflow-hidden border border-white/10 bg-black relative shadow-[0_20px_60px_-10px_rgba(0,0,0,0.6)]">
+              <img src={c.image} alt={c.name} class="absolute inset-0 w-full h-full object-cover" />
+              <!-- Pro gradient wash -->
+              <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,92,0,0.2)_0%,transparent_45%,rgba(120,60,255,0.18)_100%)] mix-blend-overlay pointer-events-none"></div>
+              <!-- Bottom fade for label -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
+              <!-- Top edge highlight -->
+              <div class="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-white/[0.08] to-transparent pointer-events-none"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                <span class="font-mono text-[10px] font-medium text-white/80 tracking-[2px] uppercase block mb-2 drop-shadow-lg">{megapackName}</span>
+                <h4 class="font-heading text-2xl md:text-3xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">{c.name}</h4>
+              </div>
+            </div>
+          </div>
+        ))}
+        <div class="w-full aspect-square invisible"></div>
+      </div>
+
+      <!-- Info -->
+      <div class="flex flex-col gap-5">
+        {contents.map((c, i) => (
+          <div
+            class={`pack-info ${i === 0 ? "flex" : "hidden"} flex-col gap-5`}
+            data-pack-info={c.id}
+          >
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="text-[11px] font-mono font-medium text-accent tracking-[2px] uppercase rounded-full border border-accent/30 bg-accent/10 px-3 py-1">100% Royalty Free</span>
+              <span class="text-[11px] font-mono font-medium text-white/60 tracking-[1.5px] uppercase">Inside the Megapack</span>
+            </div>
+
+            <h3 class="font-heading text-xl md:text-[26px] font-bold text-white tracking-tight leading-tight">{c.tagline}</h3>
+
+            <p class="text-[15px] text-white/60 leading-relaxed">{c.copy}</p>
+
+            <!-- Audio previews -->
+            <div class="mt-2 flex flex-col gap-2.5">
+              {c.previews.map((preview) => (
+                <div class="rounded-xl border border-white/10 bg-black/30 p-4 flex items-center gap-4" data-pack-audio={c.id} data-file={preview.file}>
+                  <button class="pack-audio-play shrink-0 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 border border-white/10 text-white hover:bg-accent hover:border-accent transition-colors cursor-pointer" aria-label={`Play ${preview.label}`}>
+                    <Play size={15} class="pack-play-icon ml-0.5" />
+                    <Pause size={15} class="pack-pause-icon hidden" />
+                  </button>
+                  <div class="flex-1 flex flex-col gap-1.5 min-w-0">
+                    <span class="text-sm font-medium text-white truncate">{preview.label}</span>
+                    <div class="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                      <div class="pack-audio-progress h-full bg-accent w-0"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Gift Card bonus (Orbital + Origin variant only) -->
+    <div class="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-[minmax(0,280px)_1fr] gap-6 md:gap-10 items-center rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/10 via-white/[0.02] to-white/[0.01] p-6 md:p-10 backdrop-blur-sm" data-animate="fade-in">
+      <div class="w-full aspect-square rounded-xl overflow-hidden border border-white/10 bg-black shadow-[0_20px_60px_-10px_rgba(0,0,0,0.6)]">
+        <img
+          src="https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Diseno_sin_titulo_30.png?v=1776597519"
+          alt="$20 Creativ Audio Gift Card"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div class="flex flex-col gap-4">
+        <div class="inline-flex w-fit items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1">
+          <Lock size={11} class="text-accent" />
+          <span class="font-mono text-[10px] font-medium tracking-[2px] uppercase text-accent">Bundle Bonus</span>
+        </div>
+        <h3 class="font-heading text-2xl md:text-[32px] font-bold text-white tracking-tight leading-tight">
+          $20 <span class="bg-gradient-to-r from-accent to-accent-end bg-clip-text text-transparent">Creativ Audio</span> Gift Card
+        </h3>
+        <p class="text-[15px] text-white/60 leading-relaxed">
+          Pick the <span class="text-white font-medium">Orbital + Origin</span> bundle and we'll include a $20 gift card you can spend on any future Creativ Audio plugin — stack it on sample packs, presets or new plugin releases.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pack-tab {
+    opacity: 0.55;
+    filter: brightness(0.8) saturate(0.9);
+    transition: opacity 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+  }
+  .pack-tab:hover {
+    opacity: 0.85;
+    filter: brightness(0.95) saturate(1);
+  }
+  .pack-tab[data-active="true"] {
+    opacity: 1;
+    filter: brightness(1.1) saturate(1.15);
+    transform: scale(1.04);
+    z-index: 2;
+  }
+  .pack-tab[data-active="true"] .pack-active-ring { opacity: 1; }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLElement>('[data-pack-tab]');
+  const artworks = document.querySelectorAll<HTMLElement>('[data-pack-artwork]');
+  const infos = document.querySelectorAll<HTMLElement>('[data-pack-info]');
+
+  let currentAudio: HTMLAudioElement | null = null;
+  let currentAudioEl: HTMLElement | null = null;
+
+  function stopAudio() {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    }
+    if (currentAudioEl) {
+      currentAudioEl.classList.remove('playing');
+      const bar = currentAudioEl.querySelector('.pack-audio-progress') as HTMLElement;
+      if (bar) bar.style.width = '0%';
+    }
+    currentAudio = null;
+    currentAudioEl = null;
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const id = tab.dataset.packTab!;
+      tabs.forEach((t) => t.dataset.active = t.dataset.packTab === id ? 'true' : 'false');
+      artworks.forEach((a) => {
+        a.style.opacity = a.dataset.packArtwork === id ? '1' : '0';
+        a.style.pointerEvents = a.dataset.packArtwork === id ? 'auto' : 'none';
+      });
+      infos.forEach((inf) => {
+        const active = inf.dataset.packInfo === id;
+        inf.classList.toggle('flex', active);
+        inf.classList.toggle('hidden', !active);
+      });
+      stopAudio();
+      document.querySelectorAll('.pack-play-icon').forEach(i => i.classList.remove('hidden'));
+      document.querySelectorAll('.pack-pause-icon').forEach(i => i.classList.add('hidden'));
+    });
+  });
+
+  document.querySelectorAll<HTMLElement>('[data-pack-audio]').forEach((el) => {
+    const btn = el.querySelector('.pack-audio-play') as HTMLButtonElement;
+    const progress = el.querySelector('.pack-audio-progress') as HTMLElement;
+    const playIcon = el.querySelector('.pack-play-icon') as HTMLElement;
+    const pauseIcon = el.querySelector('.pack-pause-icon') as HTMLElement;
+    const file = el.dataset.file!;
+
+    btn.addEventListener('click', () => {
+      if (currentAudioEl === el && currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        el.classList.remove('playing');
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        return;
+      }
+
+      stopAudio();
+      document.querySelectorAll('.pack-play-icon').forEach(i => i.classList.remove('hidden'));
+      document.querySelectorAll('.pack-pause-icon').forEach(i => i.classList.add('hidden'));
+
+      currentAudio = new Audio(file);
+      currentAudioEl = el;
+      el.classList.add('playing');
+      playIcon.classList.add('hidden');
+      pauseIcon.classList.remove('hidden');
+
+      currentAudio.addEventListener('timeupdate', () => {
+        if (currentAudio && currentAudio.duration) {
+          progress.style.width = `${(currentAudio.currentTime / currentAudio.duration) * 100}%`;
+        }
+      });
+
+      currentAudio.addEventListener('ended', () => {
+        el.classList.remove('playing');
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        progress.style.width = '0%';
+        currentAudio = null;
+        currentAudioEl = null;
+      });
+
+      currentAudio.play();
+    });
+  });
+</script>

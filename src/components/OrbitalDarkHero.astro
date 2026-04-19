@@ -1,0 +1,96 @@
+---
+import { ArrowRight, Star } from "@lucide/astro";
+---
+
+<section class="relative overflow-hidden bg-[#050507]">
+  <!-- Radial glow -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,92,0,0.28),transparent_60%)] blur-3xl"></div>
+    <div class="absolute top-[100px] left-[-150px] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle_at_center,rgba(120,60,255,0.18),transparent_60%)] blur-3xl"></div>
+    <div class="absolute top-[80px] right-[-150px] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle_at_center,rgba(0,180,255,0.12),transparent_60%)] blur-3xl"></div>
+  </div>
+
+  <!-- Subtle grid overlay -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.06]"
+       style="background-image: linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px); background-size: 80px 80px;">
+  </div>
+
+  <div class="relative z-10 flex flex-col items-center gap-8 pt-6 pb-4 md:pt-10 md:pb-6 px-6 md:px-16 lg:px-20">
+    <!-- Eyebrow -->
+    <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 backdrop-blur-sm">
+      <span class="relative flex h-2 w-2">
+        <span class="absolute inline-flex h-full w-full rounded-full bg-accent opacity-60 animate-ping"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
+      </span>
+      <span class="font-body text-[11px] font-medium tracking-[2px] uppercase text-white/70">The Producer's Bundle</span>
+    </div>
+
+    <!-- ORBITAL logo -->
+    <h1 class="relative">
+      <img src="/orbital-logo-white.svg" alt="ORBITAL" class="w-[300px] md:w-[460px] lg:w-[540px] h-auto drop-shadow-[0_0_40px_rgba(255,92,0,0.3)]" />
+    </h1>
+
+    <!-- Plugin showcase image -->
+    <img
+      src="https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Orbital_Plugin_diseno.png?v=1776599337"
+      alt="Orbital plugin"
+      class="w-full max-w-[720px] h-auto"
+      loading="eager"
+    />
+
+<!-- Premium copy -->
+    <p class="font-body text-base md:text-lg text-white/70 leading-relaxed max-w-[680px] text-center">
+      Orbital is a plugin with sounds recorded from real analog synths like the <span class="text-white">Juno-106</span>, <span class="text-white">Prophet-5</span>, and <span class="text-white">Minimoog</span>, with <span class="text-white">5 built-in effects</span> to shape every sound.
+    </p>
+
+    <!-- Rating row -->
+    <div class="flex items-center gap-4">
+      <div class="flex gap-0.5">
+        {Array.from({ length: 5 }).map(() => (
+          <Star size={16} class="text-accent fill-accent" />
+        ))}
+      </div>
+      <span class="text-sm text-white/60">4.9/5 — trusted by 2,100+ producers</span>
+    </div>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center gap-3 mt-2">
+      <a
+        href="#pricing"
+        class="group relative rounded-md bg-gradient-to-r from-accent to-accent-end px-10 py-4 text-[15px] font-semibold text-white tracking-[1px] inline-flex items-center gap-2 hover:opacity-95 transition-all shadow-[0_0_48px_-8px_rgba(255,92,0,0.8)]"
+      >
+        GET ORBITAL NOW
+        <ArrowRight size={18} class="group-hover:translate-x-1 transition-transform" />
+      </a>
+      <a
+        href="#presets"
+        class="rounded-md border border-white/15 bg-white/[0.02] px-8 py-4 text-[15px] font-medium text-white/80 tracking-[0.5px] hover:bg-white/5 hover:text-white transition-colors"
+      >
+        Preview Presets
+      </a>
+    </div>
+
+    <!-- Product video -->
+    <div class="w-full max-w-[960px] rounded-2xl border border-white/10 overflow-hidden relative mt-8 aspect-video bg-black shadow-[0_40px_120px_-20px_rgba(255,92,0,0.25)]">
+      <iframe
+        src="https://www.youtube.com/embed/cubIFcXHXCY?rel=0"
+        title="Orbital plugin tutorial"
+        class="w-full h-full"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- Compatibility row -->
+    <div class="flex items-center gap-4 md:gap-8 py-5 flex-wrap justify-center mt-2">
+      <span class="font-body text-xs text-white/40 tracking-wider uppercase">Compatible with</span>
+      <span class="w-px h-4 bg-white/15"></span>
+      <span class="font-mono text-[13px] font-medium text-white/80">VST3</span>
+      <span class="w-px h-4 bg-white/15"></span>
+      <span class="font-mono text-[13px] font-medium text-white/80">AU</span>
+      <span class="w-px h-4 bg-white/15"></span>
+      <span class="font-mono text-[13px] font-medium text-white/80">Windows &amp; macOS</span>
+    </div>
+  </div>
+</section>

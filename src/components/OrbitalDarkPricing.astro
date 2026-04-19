@@ -1,0 +1,199 @@
+---
+import { Check, Shield } from "@lucide/astro";
+import AddToCartButton from "./AddToCartButton";
+
+const standardFeatures = [
+  { name: "Orbital Plugin", value: "$49" },
+  { name: "175 Analog Presets", value: "FREE" },
+  { name: "Free Updates", value: "FREE" },
+];
+
+const bonusPacks = [
+  { name: "Orbital Plugin", value: "$49" },
+  { name: "175 Analog Presets", value: "FREE" },
+  { name: "Origin Megapack: Drumloops", value: "$27" },
+  { name: "Origin Megapack: Samples", value: "$27" },
+  { name: "Origin Megapack: Analog Lab Bank", value: "$27" },
+  { name: "Origin Megapack: Trap Drum Kit", value: "$27" },
+  { name: "Origin Megapack: FX Collection", value: "$27" },
+  { name: "$20 CreativAudio Giftcard", value: "$20" },
+  { name: "Free Updates", value: "FREE" },
+];
+
+const totalValue = 49 + (5 * 27) + 20;
+---
+
+<section id="pricing" class="relative pt-10 pb-20 md:pt-16 md:pb-[120px] px-6 md:px-16 lg:px-[120px] bg-[#050507] overflow-hidden">
+  <!-- Background grid -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.05]"
+       style="background-image: linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px); background-size: 80px 80px;">
+  </div>
+  <!-- Glow -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[700px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,92,0,0.15),transparent_65%)] blur-3xl pointer-events-none"></div>
+
+  <div class="relative z-10 flex flex-col items-center gap-6 max-w-[1100px] mx-auto">
+    <div class="flex flex-col items-center gap-4 text-center" data-animate="fade-up">
+      <span class="text-xs font-semibold text-accent tracking-[2px] uppercase">Pricing</span>
+      <h2 class="font-heading text-4xl md:text-[52px] font-bold text-white tracking-[-1.5px] text-center leading-[1.05]">
+        Pick Your <span class="bg-gradient-to-r from-accent to-accent-end bg-clip-text text-transparent">Edition.</span>
+      </h2>
+      <p class="text-base md:text-lg text-white/60 leading-relaxed max-w-[580px]">
+        One-time purchase. Lifetime access. 15-day money-back guarantee.
+      </p>
+    </div>
+
+    <!-- Countdown -->
+    <div class="flex flex-col items-center gap-3">
+      <span class="text-[11px] font-semibold text-accent tracking-[2px] uppercase">Launch Offer Ends In</span>
+      <div class="flex gap-1.5 items-center" id="dark-countdown-timer">
+        <div class="rounded-lg bg-white/10 border border-white/10 px-3 py-2.5 flex flex-col items-center gap-0.5 min-w-[52px]">
+          <span class="font-mono text-2xl font-bold text-white" id="dark-timer-hrs">00</span>
+          <span class="text-[10px] text-white/40">HRS</span>
+        </div>
+        <span class="font-mono text-xl text-white/30">:</span>
+        <div class="rounded-lg bg-white/10 border border-white/10 px-3 py-2.5 flex flex-col items-center gap-0.5 min-w-[52px]">
+          <span class="font-mono text-2xl font-bold text-white" id="dark-timer-min">00</span>
+          <span class="text-[10px] text-white/40">MIN</span>
+        </div>
+        <span class="font-mono text-xl text-white/30">:</span>
+        <div class="rounded-lg bg-white/10 border border-white/10 px-3 py-2.5 flex flex-col items-center gap-0.5 min-w-[52px]">
+          <span class="font-mono text-2xl font-bold text-white" id="dark-timer-sec">00</span>
+          <span class="text-[10px] text-white/40">SEC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-tier pricing -->
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-6 mt-4" data-animate="scale-in">
+      <!-- Standard tier -->
+      <div class="relative rounded-2xl bg-white/[0.03] border border-white/10 p-8 md:p-8 flex flex-col gap-5 backdrop-blur-sm">
+        <div class="self-center inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-1.5 backdrop-blur-sm">
+          <span class="text-[11px] font-semibold text-white/80 tracking-[2px] uppercase">Standard</span>
+        </div>
+
+        <img src="https://cdn.shopify.com/s/files/1/1030/1797/2049/files/2_d94d554f-4bec-433c-9376-25aafb0e670d.png?v=1776595634" alt="Orbital Plugin" class="w-full aspect-square object-cover rounded-xl border border-white/10" />
+
+        <div class="flex flex-col gap-1">
+          <span class="font-heading text-xl font-bold text-white">ORBITAL Plugin</span>
+          <div class="flex items-baseline gap-3">
+            <span class="text-4xl font-heading font-bold text-white">$49</span>
+            <span class="text-base text-white/30 line-through">$119</span>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <AddToCartButton client:visible />
+        </div>
+
+        <div class="flex flex-col gap-2 self-stretch mt-2 pt-4 border-t border-white/10">
+          {standardFeatures.map((item) => (
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <Check size={14} class="text-white/50 shrink-0" />
+                <span class="text-[13px] text-white/75 truncate">{item.name}</span>
+              </div>
+              <span class="text-[13px] font-mono text-white/70 shrink-0">{item.value}</span>
+            </div>
+          ))}
+          <div class="flex items-center justify-between gap-3 mt-2 pt-3 border-t border-white/10">
+            <span class="text-sm font-semibold text-white">Total Value:</span>
+            <div class="flex items-center gap-2">
+              <span class="text-sm text-white/40 line-through">$119</span>
+              <span class="text-base font-bold text-white">$49</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Best Value tier -->
+      <div class="relative rounded-2xl bg-gradient-to-b from-accent/20 via-white/[0.04] to-white/[0.01] border-2 border-accent/40 p-8 md:p-8 flex flex-col gap-5 backdrop-blur-sm">
+        <!-- Top badge -->
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-accent to-accent-end px-4 py-1.5 text-[10px] font-bold text-white tracking-[2px] uppercase shadow-[0_8px_24px_-4px_rgba(255,92,0,0.6)] whitespace-nowrap">
+          Save ${totalValue - 67}
+        </div>
+
+        <div class="self-center inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 backdrop-blur-sm">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+          <span class="text-[11px] font-semibold text-accent tracking-[2px] uppercase">Best Value Bundle</span>
+        </div>
+
+        <!-- Stacked artwork -->
+        <div class="relative w-full aspect-square rounded-xl overflow-hidden border border-white/10 bg-gradient-to-br from-[#1a1a22] to-[#050507]">
+          <img src="https://cdn.shopify.com/s/files/1/1030/1797/2049/files/1_48545554-e538-46e6-9c33-ebbc24dde180.png?v=1776595655" alt="Orbital Plugin + Origin Megapack" class="absolute inset-0 w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          <div class="absolute bottom-3 left-3 right-3 grid grid-cols-5 gap-1.5">
+            {[
+              "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/4_drumloop.png?v=1776523199",
+              "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/5_melody_loops.png?v=1776523199",
+              "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/8_analog_bank.png?v=1776523199",
+              "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/6_trap_drumkit.png?v=1776523199",
+              "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/7_fx_collection.png?v=1776523199",
+            ].map((src) => (
+              <div class="aspect-square rounded-md overflow-hidden border border-white/20 shadow-lg bg-black">
+                <img src={src} alt="" loading="lazy" class="w-full h-full object-cover" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <span class="font-heading text-xl font-bold text-white">ORBITAL + Origin Megapack</span>
+          <div class="flex items-baseline gap-3">
+            <span class="text-4xl font-heading font-bold text-white">$67</span>
+            <span class="text-base text-white/40 line-through">${totalValue}</span>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <AddToCartButton client:visible variant="bundle" />
+        </div>
+
+        <div class="flex flex-col gap-2 self-stretch mt-2 pt-4 border-t border-white/10">
+          {bonusPacks.map((item) => (
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <Check size={14} class="text-accent shrink-0" />
+                <span class="text-[13px] text-white/75 truncate">{item.name}</span>
+              </div>
+              <span class="text-[13px] font-mono text-accent shrink-0">{item.value}</span>
+            </div>
+          ))}
+          <div class="flex items-center justify-between gap-3 mt-2 pt-3 border-t border-white/10">
+            <span class="text-sm font-semibold text-white">Total Value:</span>
+            <div class="flex items-center gap-2">
+              <span class="text-sm text-white/40 line-through">${totalValue}</span>
+              <span class="text-base font-bold text-accent">$67</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <span class="text-sm text-white/50 mt-4" data-animate="fade-up">VST3 / AU Support — Windows &amp; macOS</span>
+
+    <div class="flex items-center gap-2.5" data-animate="fade-up">
+      <Shield size={18} class="text-accent shrink-0" />
+      <span class="text-sm text-white/60">15-Day Money-Back Guarantee — No Questions Asked</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  function updateDarkCountdown() {
+    const now = new Date();
+    const endOfDay = new Date(now);
+    endOfDay.setHours(23, 59, 59, 999);
+    const diff = endOfDay.getTime() - now.getTime();
+
+    const hrs = Math.floor(diff / (1000 * 60 * 60));
+    const min = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const sec = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("dark-timer-hrs")!.textContent = String(hrs).padStart(2, "0");
+    document.getElementById("dark-timer-min")!.textContent = String(min).padStart(2, "0");
+    document.getElementById("dark-timer-sec")!.textContent = String(sec).padStart(2, "0");
+  }
+
+  updateDarkCountdown();
+  setInterval(updateDarkCountdown, 1000);
+</script>

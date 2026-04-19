@@ -1,0 +1,80 @@
+---
+import { Menu, X } from "@lucide/astro";
+import CartButton from "./CartButton";
+---
+
+<header class="sticky top-[38px] z-50 bg-[#0A0A0C]/80 backdrop-blur-xl border-b border-white/5">
+  <div class="flex items-center justify-between py-5 px-6 md:px-16 lg:px-20">
+    <a href="/" class="flex items-center gap-3">
+      <img src="/creativ-audio-logo.webp" alt="CreativAudio" class="h-5 md:h-7 w-auto -ml-3 invert brightness-200" />
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Orbital navigation">
+      <a href="#presets" class="font-body text-[13px] font-medium text-white/60 tracking-[0.8px] hover:text-white transition-colors">PRESETS</a>
+      <a href="#features" class="font-body text-[13px] font-medium text-white/60 tracking-[0.8px] hover:text-white transition-colors">FEATURES</a>
+      <a href="#bonus" class="font-body text-[13px] font-medium text-white/60 tracking-[0.8px] hover:text-white transition-colors">BONUS</a>
+      <a href="#reviews" class="font-body text-[13px] font-medium text-white/60 tracking-[0.8px] hover:text-white transition-colors">REVIEWS</a>
+      <a href="#pricing" class="font-body text-[13px] font-medium text-white/60 tracking-[0.8px] hover:text-white transition-colors">PRICING</a>
+      <a href="#faq" class="font-body text-[13px] font-medium text-white/60 tracking-[0.8px] hover:text-white transition-colors">FAQ</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <button class="lg:hidden text-white/80" aria-label="Menu" id="mobile-menu-btn">
+        <Menu size={20} id="menu-icon-open" />
+        <X size={20} id="menu-icon-close" class="hidden" />
+      </button>
+
+      <div class="orbital-cart-dark">
+        <CartButton client:load />
+      </div>
+
+      <a
+        href="#pricing"
+        class="hidden md:inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-accent to-accent-end px-6 py-2.5 text-[13px] font-semibold text-white tracking-[0.5px] hover:opacity-90 transition-opacity shadow-[0_0_24px_-4px_rgba(255,92,0,0.6)]"
+      >
+        GET ORBITAL
+      </a>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="hidden lg:hidden border-t border-white/5 bg-[#0A0A0C]/95 backdrop-blur-xl">
+    <div class="flex flex-col py-4 px-6 gap-1">
+      <a href="#presets" class="mobile-nav-link font-body text-[14px] font-medium text-white/70 tracking-[0.8px] py-3 hover:text-white transition-colors">PRESETS</a>
+      <a href="#features" class="mobile-nav-link font-body text-[14px] font-medium text-white/70 tracking-[0.8px] py-3 hover:text-white transition-colors">FEATURES</a>
+      <a href="#bonus" class="mobile-nav-link font-body text-[14px] font-medium text-white/70 tracking-[0.8px] py-3 hover:text-white transition-colors">BONUS</a>
+      <a href="#reviews" class="mobile-nav-link font-body text-[14px] font-medium text-white/70 tracking-[0.8px] py-3 hover:text-white transition-colors">REVIEWS</a>
+      <a href="#pricing" class="mobile-nav-link font-body text-[14px] font-medium text-white/70 tracking-[0.8px] py-3 hover:text-white transition-colors">PRICING</a>
+      <a href="#faq" class="mobile-nav-link font-body text-[14px] font-medium text-white/70 tracking-[0.8px] py-3 hover:text-white transition-colors">FAQ</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .orbital-cart-dark :global(button) {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .orbital-cart-dark :global(button:hover) {
+    color: rgb(255, 255, 255);
+  }
+</style>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn")!;
+  const menu = document.getElementById("mobile-menu")!;
+  const iconOpen = document.getElementById("menu-icon-open")!;
+  const iconClose = document.getElementById("menu-icon-close")!;
+
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+    iconOpen.classList.toggle("hidden");
+    iconClose.classList.toggle("hidden");
+  });
+
+  menu.querySelectorAll(".mobile-nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.classList.add("hidden");
+      iconOpen.classList.remove("hidden");
+      iconClose.classList.add("hidden");
+    });
+  });
+</script>

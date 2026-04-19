@@ -1,5 +1,5 @@
 import { useStore } from "@nanostores/react";
-import { useEffect } from "react";
+import { useEffect, Fragment } from "react";
 import {
   $cartOpen,
   $cartItems,
@@ -11,6 +11,17 @@ import {
   getCheckoutUrl,
   initCart,
 } from "../stores/cart";
+import { ORBITAL_VARIANTS } from "../lib/shopify";
+
+const VARIANT_IMAGES: Record<string, string> = {
+  [ORBITAL_VARIANTS.basic]: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/2_d94d554f-4bec-433c-9376-25aafb0e670d.png?v=1776595634",
+  [ORBITAL_VARIANTS.bundle]: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/1_48545554-e538-46e6-9c33-ebbc24dde180.png?v=1776595655",
+};
+
+const BUNDLE_EXTRAS = [
+  { name: "+500 Samples Collection", image: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/5_melody_loops.png?v=1776523199" },
+  { name: "$20 Gift Card", image: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Diseno_sin_titulo_31.png?v=1776597518" },
+];
 
 export default function CartDrawer() {
   const isOpen = useStore($cartOpen);
@@ -62,75 +73,98 @@ export default function CartDrawer() {
             </div>
           ) : (
             <div className="flex flex-col gap-6">
-              {items.map((item) => (
-                <div key={item.id} className="flex gap-4">
-                  {/* Product image */}
-                  <img
-                    src="/orbital-plugin.webp"
-                    alt="Orbital"
-                    className="w-20 h-20 rounded-lg object-cover shrink-0"
-                  />
+              {items.map((item) => {
+                const isBundle = item.id === ORBITAL_VARIANTS.bundle;
+                return (
+                  <Fragment key={item.id}>
+                    <div className="flex gap-4">
+                      {/* Product image */}
+                      <img
+                        src={VARIANT_IMAGES[item.id] || "/orbital-plugin.webp"}
+                        alt={item.name}
+                        className="w-20 h-20 rounded-lg object-cover shrink-0"
+                      />
 
-                  <div className="flex-1 flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-sm font-semibold text-[#111111]">
-                        {item.name}
-                      </h3>
-                      <p className="text-xs text-[#888888]">
-                        Audio Synthesizer Plugin
-                      </p>
-                    </div>
+                      <div className="flex-1 flex flex-col justify-between">
+                        <div>
+                          <h3 className="text-sm font-semibold text-[#111111]">
+                            {item.name}
+                          </h3>
+                          <p className="text-xs text-[#888888]">
+                            Audio Synthesizer Plugin
+                          </p>
+                        </div>
 
-                    <div className="flex items-center justify-between">
-                      {/* Quantity */}
-                      <div className="flex items-center gap-2 border border-[#E5E5E7] rounded-md">
-                        <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
-                          }
-                          disabled={loading}
-                          className="px-2.5 py-1 text-sm text-[#555555] hover:text-[#111111] disabled:opacity-50"
-                        >
-                          −
-                        </button>
-                        <span className="text-sm font-medium text-[#111111] min-w-[20px] text-center">
-                          {item.quantity}
-                        </span>
-                        <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
-                          }
-                          disabled={loading}
-                          className="px-2.5 py-1 text-sm text-[#555555] hover:text-[#111111] disabled:opacity-50"
-                        >
-                          +
-                        </button>
+                        <div className="flex items-center justify-between">
+                          {/* Quantity */}
+                          <div className="flex items-center gap-2 border border-[#E5E5E7] rounded-md">
+                            <button
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity - 1)
+                              }
+                              disabled={loading}
+                              className="px-2.5 py-1 text-sm text-[#555555] hover:text-[#111111] disabled:opacity-50"
+                            >
+                              −
+                            </button>
+                            <span className="text-sm font-medium text-[#111111] min-w-[20px] text-center">
+                              {item.quantity}
+                            </span>
+                            <button
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity + 1)
+                              }
+                              disabled={loading}
+                              className="px-2.5 py-1 text-sm text-[#555555] hover:text-[#111111] disabled:opacity-50"
+                            >
+                              +
+                            </button>
+                          </div>
+
+                          {/* Price */}
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-base font-semibold text-[#111111]">
+                              ${item.price * item.quantity}
+                            </span>
+                            {item.quantity === 1 && (
+                              <span className="text-sm text-[#999999] line-through">
+                                ${item.originalPrice}
+                              </span>
+                            )}
+                          </div>
+                        </div>
                       </div>
 
-                      {/* Price */}
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-base font-semibold text-[#111111]">
-                          ${item.price * item.quantity}
-                        </span>
-                        {item.quantity === 1 && (
-                          <span className="text-sm text-[#999999] line-through">
-                            ${item.originalPrice}
-                          </span>
-                        )}
-                      </div>
+                      {/* Remove */}
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        disabled={loading}
+                        className="text-[#CCCCCC] hover:text-[#FF5C00] transition-colors self-start text-lg disabled:opacity-50"
+                      >
+                        &times;
+                      </button>
                     </div>
-                  </div>
 
-                  {/* Remove */}
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    disabled={loading}
-                    className="text-[#CCCCCC] hover:text-[#FF5C00] transition-colors self-start text-lg disabled:opacity-50"
-                  >
-                    &times;
-                  </button>
-                </div>
-              ))}
+                    {/* Bundle extras — visual only, delivered via Shopify Digital Downloads */}
+                    {isBundle && BUNDLE_EXTRAS.map((extra) => (
+                      <div key={extra.name} className="flex gap-4 pl-4 -mt-3">
+                        <img
+                          src={extra.image}
+                          alt=""
+                          className="w-14 h-14 rounded-lg object-cover shrink-0 border border-[#E5E5E7]"
+                        />
+                        <div className="flex-1 flex items-center justify-between">
+                          <div>
+                            <h4 className="text-sm font-semibold text-[#111111]">{extra.name}</h4>
+                            <p className="text-xs text-[#888888]">Bonus included</p>
+                          </div>
+                          <span className="text-xs font-semibold text-[#FF5C00] tracking-[1px] uppercase">Included</span>
+                        </div>
+                      </div>
+                    ))}
+                  </Fragment>
+                );
+              })}
             </div>
           )}
         </div>

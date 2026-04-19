@@ -6,8 +6,15 @@ import {
   updateCartLines,
   removeCartLines,
   getCart,
-  ORBITAL_VARIANT_ID,
+  ORBITAL_VARIANTS,
+  type OrbitalVariantKey,
 } from "../lib/shopify";
+
+// Display metadata per variant (price comes from Shopify; originalPrice is our "compare-at" for UI)
+const VARIANT_INFO: Record<string, { key: OrbitalVariantKey; name: string; originalPrice: number }> = {
+  [ORBITAL_VARIANTS.basic]: { key: "basic", name: "Orbital", originalPrice: 119 },
+  [ORBITAL_VARIANTS.bundle]: { key: "bundle", name: "Orbital + Origin Megapack", originalPrice: 196 },
+};
 
 export interface CartItem {
   id: string;
@@ -35,7 +42,7 @@ export const $cartTotal = computed($cartItems, (items) =>
 );
 
 export function getCheckoutUrl(): string {
-  return $checkoutUrl.get() || "https://creativ-audio.myshopify.com/cart/53297424367953:1";
+  return $checkoutUrl.get() || "https://creativ-audio.myshopify.com/cart/53569851326801:1";
 }
 
 function saveCartId(cartId: string) {
@@ -55,14 +62,19 @@ function getStoredCartId(): string | null {
 function syncCartFromShopify(cart: any) {
   if (!cart) return;
   $checkoutUrl.set(cart.checkoutUrl);
-  const items: CartItem[] = cart.lines.edges.map((edge: any) => ({
-    id: "orbital",
-    lineId: edge.node.id,
-    name: edge.node.merchandise.product.title,
-    price: 49,
-    originalPrice: 119,
-    quantity: edge.node.quantity,
-  }));
+  const items: CartItem[] = cart.lines.edges.map((edge: any) => {
+    const merchandiseId: string = edge.node.merchandise.id;
+    const info = VARIANT_INFO[merchandiseId];
+    const price = Number(edge.node.merchandise.priceV2?.amount) || 0;
+    return {
+      id: merchandiseId,
+      lineId: edge.node.id,
+      name: info?.name || edge.node.merchandise.product.title,
+      price,
+      originalPrice: info?.originalPrice ?? price,
+      quantity: edge.node.quantity,
+    };
+  });
   $cartItems.set(items);
 }
 
@@ -94,18 +106,19 @@ export async function initCart() {
   }
 }
 
-export async function addToCart() {
+export async function addToCart(variant: OrbitalVariantKey = "basic") {
   $cartLoading.set(true);
+  const variantId = ORBITAL_VARIANTS[variant];
+  const fallbackInfo = VARIANT_INFO[variantId];
+  const fallbackPrice = variant === "bundle" ? 67 : 49;
   try {
     const cartId = $shopifyCartId.get();
     let cart;
 
     if (cartId) {
-      // Add line to existing cart
-      cart = await addCartLines(cartId, ORBITAL_VARIANT_ID, 1);
+      cart = await addCartLines(cartId, variantId, 1);
     } else {
-      // Create new cart
-      cart = await createCart(ORBITAL_VARIANT_ID, 1);
+      cart = await createCart(variantId, 1);
       saveCartId(cart.id);
     }
 
@@ -115,17 +128,24 @@ export async function addToCart() {
     console.error("Error adding to cart:", error);
     // Fallback: add locally so UX doesn't break
     const items = $cartItems.get();
-    const existing = items.find((i) => i.id === "orbital");
+    const existing = items.find((i) => i.id === variantId);
     if (existing) {
       $cartItems.set(
         items.map((i) =>
-          i.id === "orbital" ? { ...i, quantity: i.quantity + 1 } : i
+          i.id === variantId ? { ...i, quantity: i.quantity + 1 } : i
         )
       );
     } else {
       $cartItems.set([
         ...items,
-        { id: "orbital", lineId: "", name: "Orbital", price: 49, originalPrice: 119, quantity: 1 },
+        {
+          id: variantId,
+          lineId: "",
+          name: fallbackInfo?.name || "Orbital",
+          price: fallbackPrice,
+          originalPrice: fallbackInfo?.originalPrice ?? fallbackPrice,
+          quantity: 1,
+        },
       ]);
     }
     $cartOpen.set(true);

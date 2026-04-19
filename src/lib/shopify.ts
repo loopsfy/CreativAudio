@@ -21,8 +21,13 @@ async function shopifyFetch(query: string, variables: Record<string, any> = {}) 
   return json.data;
 }
 
-// Product variant GID for Orbital
-export const ORBITAL_VARIANT_ID = "gid://shopify/ProductVariant/53297424367953";
+// Product variant GIDs for Orbital
+export const ORBITAL_VARIANTS = {
+  basic: "gid://shopify/ProductVariant/53569851326801",   // $49 — Orbital plugin
+  bundle: "gid://shopify/ProductVariant/53569851359569",  // $67 — Orbital + Origin Megapack
+} as const;
+export type OrbitalVariantKey = keyof typeof ORBITAL_VARIANTS;
+export const ORBITAL_VARIANT_ID = ORBITAL_VARIANTS.basic;
 
 export async function createEmptyCart() {
   const query = `

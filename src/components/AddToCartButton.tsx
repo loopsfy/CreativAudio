@@ -1,34 +1,43 @@
 import { useState } from "react";
 import { addToCart, $cartLoading } from "../stores/cart";
 import { useStore } from "@nanostores/react";
+import type { OrbitalVariantKey } from "../lib/shopify";
 
-export default function AddToCartButton() {
+const VARIANT_META: Record<OrbitalVariantKey, { price: number; name: string; itemId: string }> = {
+  basic: { price: 49, name: "Orbital", itemId: "orbital" },
+  bundle: { price: 67, name: "Orbital + Origin Megapack", itemId: "orbital-bundle" },
+};
+
+interface Props {
+  variant?: OrbitalVariantKey;
+}
+
+export default function AddToCartButton({ variant = "basic" }: Props) {
   const [added, setAdded] = useState(false);
   const loading = useStore($cartLoading);
+  const meta = VARIANT_META[variant];
 
   async function handleClick() {
     if (loading) return;
 
-    await addToCart();
+    await addToCart(variant);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
 
-    // Meta Pixel: AddToCart event
     if (typeof window !== "undefined" && (window as any).fbq) {
       (window as any).fbq("track", "AddToCart", {
-        content_name: "Orbital",
+        content_name: meta.name,
         content_type: "product",
-        value: 49,
+        value: meta.price,
         currency: "USD",
       });
     }
 
-    // GA4: add_to_cart event
     if (typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "add_to_cart", {
         currency: "USD",
-        value: 49,
-        items: [{ item_id: "orbital", item_name: "Orbital", price: 49, quantity: 1 }],
+        value: meta.price,
+        items: [{ item_id: meta.itemId, item_name: meta.name, price: meta.price, quantity: 1 }],
       });
     }
   }
