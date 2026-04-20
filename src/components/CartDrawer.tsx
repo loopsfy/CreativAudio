@@ -14,8 +14,8 @@ import {
 import { ORBITAL_VARIANTS } from "../lib/shopify";
 
 const VARIANT_IMAGES: Record<string, string> = {
-  [ORBITAL_VARIANTS.basic]: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/2_d94d554f-4bec-433c-9376-25aafb0e670d.png?v=1776595634",
-  [ORBITAL_VARIANTS.bundle]: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/1_48545554-e538-46e6-9c33-ebbc24dde180.png?v=1776595655",
+  [ORBITAL_VARIANTS.basic]: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Variant_1.png?v=1776706194",
+  [ORBITAL_VARIANTS.bundle]: "https://cdn.shopify.com/s/files/1/1030/1797/2049/files/Variant_2.png?v=1776706194",
 };
 
 const BUNDLE_EXTRAS = [
